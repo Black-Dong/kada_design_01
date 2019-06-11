@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace 配置到接口  接口的全限定类名-->
+<mapper namespace="cn.imust.dao.UserDao">
+    <!--id方法名称 resultType 返回值的类型-->
+    <select id="findUsers"  parameterType="pageBeanUI" resultMap="userMap">
+        select * from tbl_user
+        <where>
+            <if test="user!=null">
+                <if test="user.username!=null and user.username!=''">
+                    and username like '%${user.username}%'
+                </if>
+                <if test="user.status!=null and user.status!=''">
+                    and status=#{user.status}
+                </if>
+            </if>
+        </where>
+
+    </select>
+
+    <!--登陆配置 查询数据 自动封装数据 而自动封装是有问题 问题在于 数据库字段和实体类字段不一致 如果出现不一致 需要手动封装 resultMap="" -->
+    <select id="findUserByNameAndPwd"  resultMap="userMap" parameterType="user">/*resultType="user"*/
+      select * from tbl_user where username=#{username} and password=#{password}
+    </select>
+
+    <!--手动封装user数据配置
+        column数据库字段
+        property 实体类中的字段
+    -->
+    <resultMap id="userMap" type="user">
+        <!--1.主键-->
+        <id property="uid" column="uid"></id>
+        <!--2.普通字段-->
+        <result column="username" property="username"></result>
+        <result column="name" property="name"></result>
+
+        <result column="password" property="password"></result>
+        <result column="status" property="status"></result>
+        <!--特殊加一个手动赋值-->
+        <result column="create_date" property="createDate"></result>
+        <result column="gender" property="gender"></result>
+        <result column="telephone" property="telephone"></result>
+        <result column="email" property="email"></result>
+        <!--3.外键字段-->
+
+    </resultMap>
+
+    <!--配置一个保存的方法-->
+    <insert id="saveUser" parameterType="user">
+        insert into tbl_user values(null , #{username} , #{name},#{password} , #{status} , #{createDate} , #{gender},#{email},#{telephone})
+    </insert>
+</mapper>

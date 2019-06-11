@@ -1,0 +1,91 @@
+div{
+    		text-align: center;
+    	}
+    	.topDiv{
+    		width: 1000px;
+    		margin: 20px auto 10px;
+    	}
+    	
+    	.topDiv span{
+    		font-size: 30px;
+    		color: #333;
+    	}
+    	
+    	.contentDiv{
+    		margin:0 auto;
+    		width: 1000px;
+    	}
+    	
+    	.leftDiv{
+    		float:left;
+    		width:660px;
+    		text-align: left;
+    	}
+    	
+    	.rightDiv{
+    		float: left;
+    		width:340px;
+    		text-align: right;
+    	}
+    	
+    	.bannerDiv{
+    		width:100%;
+    		margin:150 10 20 40
+    	}
+    	
+    	.bannerDiv span{
+    		color: #999;
+    		font-size: 28px;
+    	}
+    	
+    	.formDiv{
+    		width: 100%;
+    		margin:0 10 50 40;
+    	}
+    	
+    	.msgSpan{
+    		color: red;
+    		font-size: 18px;
+    	}
+    	
+        tr{
+          line-height: 50px;
+          text-align: center;
+        }
+        td{
+        	padding: 2px 6px;
+        	color: #999;
+        	font-size: 18px;
+        }
+        
+        .leftTd{
+        	text-align: right;
+        }
+        
+        .rightTd{
+        	text-align: left;
+        }
+        
+        .inputTxt{
+        	border: 1px #e7e7e7 solid;
+    		border-radius: 10px;
+    		margin: 0px 5px;
+        	width: 160px;
+        	height: 25px;
+        }
+        
+        button{
+        	border: 1px #e7e7e7 solid;
+    		border-radius: 10px;
+    		width: 50px;
+        	font-size: 12px;
+        	color:#999;
+        	padding: 4;
+        }
+        
+        .copyTxt{
+        	padding: 3px;
+        	text-align: center;
+        	color: #999;
+        	font-size: 15px;
+        } 
