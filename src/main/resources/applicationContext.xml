@@ -13,6 +13,7 @@
 	http://www.springframework.org/schema/tx
 	http://www.springframework.org/schema/tx/spring-tx.xsd">
 <!--dao层配置开始-->
+    <context:component-scan base-package="cn.imust.dao"/>
     <context:property-placeholder location="classpath*:db.properties"/>
     <!--Spring 与mybatis整合-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
@@ -33,6 +34,8 @@
     </bean>
     <!--Spring 与mybatis整合结束-->
 <!--dao层结束-->
+
+
 
 <!--service配置开始-->
     <!--扫描业务层-->
