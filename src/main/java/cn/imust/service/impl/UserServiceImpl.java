@@ -14,7 +14,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Autowired
-    private UserDao userDao;//注入一个userDao
+    private UserDao userDao;//注入一个userDao,按类型注入
 
     /**
      * 查询用户数据 测试代码
