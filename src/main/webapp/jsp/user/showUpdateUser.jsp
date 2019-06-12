@@ -50,8 +50,8 @@
 					</tr>
 
 					<tr>
-						<td class="font3 fftd">密&nbsp;码：<input name="gender" id="gender" value="${user.gender}" size="20" /></td>
-						<td class="font3 fftd">性&nbsp;别：<input name="password" id="password" value="${user.password}" size="20" /></td>
+						<td class="font3 fftd">密&nbsp;码：<input name="password" id="password" value="${user.password}" size="20" /></td>
+						<td class="font3 fftd">性&nbsp;别：<input name="gender" id="gender" value="${user.gender}" size="20" /></td>
 					</tr>
 					<tr>
 						<td class="font3 fftd">邮&nbsp;箱：<input name="email" id="email" value="${user.email}" size="20" /></td>
@@ -63,7 +63,7 @@
 		    </td></tr>
 			<tr><td class="main_tdbor"></td></tr>
 			
-			<tr><td align="left" class="fftd"><input type="submit" value="修改 ">&nbsp;&nbsp;<input type="reset" value="取消 "></td></tr>
+			<tr><td align="left" class="fftd"><input type="submit" value="修改 ">&nbsp;&nbsp;<input type="reset" value="重置"></td></tr>
 		  </table>
 		 </form>
 	</td>

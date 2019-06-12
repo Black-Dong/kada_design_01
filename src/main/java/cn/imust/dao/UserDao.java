@@ -17,4 +17,6 @@ public interface UserDao {
     void saveUser(User user);
 
     User findUserById(Integer uid);
+
+    void updateUser(User user);
 }

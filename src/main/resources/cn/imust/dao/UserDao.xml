@@ -55,4 +55,8 @@
     <select id="findUserById" parameterType="int" resultMap="userMap">
         select * from tbl_user where uid = #{uid}
     </select>
+
+    <update id="updateUser" parameterType="user">
+        update tbl_user set username=#{username},name=#{name},password=#{password},gender=#{gender},email=#{email},telephone=#{telephone} where uid=#{uid}
+    </update>
 </mapper>

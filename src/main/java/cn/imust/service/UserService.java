@@ -18,4 +18,7 @@ public interface UserService {
 
     //根据id查询用户
     User finduserById(Integer uid);
+
+    //修改用户
+    void updateUser(User user);
 }

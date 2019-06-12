@@ -26,7 +26,19 @@ public class UserController {
     @Autowired
     private UserService userService;//注入service
 
+    //修改时点击提交
+    @RequestMapping("/updateUser")
+    public String updateUser(User user){
+        System.out.println(user);
 
+
+        userService.updateUser(user);
+
+        return "redirect:userList";
+    }
+
+
+    //点击修改后跳转到修改页面, 且根据id查询dao该用户信息回显
     @RequestMapping("/updateUserUI")
     public ModelAndView updateUserUI(Integer uid){
 
@@ -70,12 +82,6 @@ public class UserController {
     @RequestMapping("/addUser")
     public String addUser(User user,HttpSession  session){
 
-        //1.获得用户数据--需要手动封装createDate
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String createDate = simpleDateFormat.format(new Date());
-        user.setCreateDate(createDate);
-        System.out.println(user);
-
         //添加的只是普通管理员  超级管理员可以添加  但是普通管理员不应该能操作
         //判断session的用户是超级还是普通即可
         User loginUser = (User)session.getAttribute("loginUser");
@@ -84,10 +90,16 @@ public class UserController {
         }
 
         //2.保存
+        //获得用户数据--需要手动封装createDate
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String createDate = simpleDateFormat.format(new Date());
+        user.setCreateDate(createDate);
+        System.out.println(user);
+        user.setStatus("2");
         userService.saveUser(user);
 
         // 返回时 跳转向查询页面 预留
-       return "redirect:userList";
+        return "redirect:userList";
     }
 
     /**
