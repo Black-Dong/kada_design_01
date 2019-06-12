@@ -26,6 +26,12 @@ public class UserController {
     @Autowired
     private UserService userService;//注入service
 
+    @RequestMapping("/deleteById")
+    public String deleteById(Integer[] ids){
+        userService.deleteById(ids);
+        return "redirect:userList";
+    }
+
     //修改时点击提交
     @RequestMapping("/updateUser")
     public String updateUser(User user){

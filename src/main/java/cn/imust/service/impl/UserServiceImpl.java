@@ -7,6 +7,8 @@ import cn.imust.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -71,6 +73,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(User user) {
+        //获得用户数据--需要手动封装createDate
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String createDate = simpleDateFormat.format(new Date());
+        user.setCreateDate(createDate);
         userDao.updateUser(user);
+    }
+
+    @Override
+    public void deleteById(Integer[] ids) {
+        for (int id : ids){
+            userDao.deleteById(id);
+        }
     }
 }

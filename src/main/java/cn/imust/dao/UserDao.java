@@ -19,4 +19,6 @@ public interface UserDao {
     User findUserById(Integer uid);
 
     void updateUser(User user);
+
+    void deleteById(int id);
 }

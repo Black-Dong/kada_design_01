@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserService {
 
-    //测试环境的代码
+    //查找用户
     public List<User> findUsers(PageBeanUI pageBeanUI);
 
     //登陆
@@ -21,4 +21,7 @@ public interface UserService {
 
     //修改用户
     void updateUser(User user);
+
+    //删除用户
+    void deleteById(Integer[] ids);
 }

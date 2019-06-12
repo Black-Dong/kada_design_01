@@ -57,6 +57,10 @@
     </select>
 
     <update id="updateUser" parameterType="user">
-        update tbl_user set username=#{username},name=#{name},password=#{password},gender=#{gender},email=#{email},telephone=#{telephone} where uid=#{uid}
+        update tbl_user set username=#{username},name=#{name},password=#{password},create_Date=#{createDate},gender=#{gender},email=#{email},telephone=#{telephone} where uid=#{uid}
     </update>
+
+    <delete id="deleteById" parameterType="int">
+        delete from tbl_user where uid=#{id}
+    </delete>
 </mapper>
