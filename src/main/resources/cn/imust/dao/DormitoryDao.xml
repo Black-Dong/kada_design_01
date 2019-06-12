@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.imust.dao.DormitoryDao">
+    
+    <resultMap id="dormitoryMap" type="dormitory">
+        <!--1.主键-->
+        <id property="dorId" column="dor_id"></id>
+        <!--2.普通字段-->
+        <result column="dor_name" property="dorName"></result>
+        <association property="user" column="user_id" javaType="user">
+            <id property="uid" column="uid"></id>
+
+            <result column="username" property="username"></result>
+            <result column="name" property="name"></result>
+
+            <result column="password" property="password"></result>
+            <result column="status" property="status"></result>
+
+            <result column="create_date" property="createDate"></result>
+            <result column="gender" property="gender"></result>
+            <result column="telephone" property="telephone"></result>
+            <result column="email" property="email"></result>
+        </association>
+    </resultMap>
+    
+    <select id="findAll" resultMap="dormitoryMap">
+        select * from tbl_dormitory,tbl_user where tbl_dormitory.user_id = tbl_user.uid
+    </select>
+
+    <insert id="add" parameterType="dormitory">
+        insert into tbl_dormitory(dor_name,user_id) values(#{dorName},#{user.uid})
+    </insert>
+
+    <select id="findDormitoryById" parameterType="int" resultMap="dormitoryMap">
+        select * from tbl_dormitory,tbl_user where tbl_dormitory.user_id = tbl_user.uid and tbl_dormitory.dor_id=#{dorId}
+    </select>
+</mapper>

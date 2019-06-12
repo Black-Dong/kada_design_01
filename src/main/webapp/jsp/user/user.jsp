@@ -31,7 +31,7 @@
 	 	   /** 获取上一次选中的部门数据 */
 	 	   var boxs  = $("input[type='checkbox'][id^='box_']");
 	 	   
-	 	  /** 给数据行绑定鼠标覆盖以及鼠标移开事件  */
+	 	  	/** 给数据行绑定鼠标覆盖以及鼠标移开事件  */
 	    	$("tr[id^='data_']").hover(function(){
 	    		$(this).css("backgroundColor","#eeccff");
 	    	},function(){
