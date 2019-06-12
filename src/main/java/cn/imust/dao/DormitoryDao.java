@@ -11,4 +11,6 @@ public interface DormitoryDao {
     void add(Dormitory dormitory);
 
     Dormitory findDormitoryById(int dorId);
+
+    void deleteById(int id);
 }

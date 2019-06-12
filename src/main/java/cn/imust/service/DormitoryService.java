@@ -11,4 +11,6 @@ public interface DormitoryService {
     void add(Dormitory dormitory);
 
     Dormitory findDormitoryById(Integer dorId);
+
+    void deleteById(Integer[] ids);
 }

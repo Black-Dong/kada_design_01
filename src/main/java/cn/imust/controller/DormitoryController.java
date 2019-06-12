@@ -20,6 +20,14 @@ public class DormitoryController {
     @Autowired
     private UserService userService;
 
+    @RequestMapping("/deleteById")
+    public String deleteById(Integer[] ids){
+
+        dormitoryService.deleteById(ids);
+
+        return "redirect:dormitoryList";
+    }
+
     //点击查询后的回显
     @RequestMapping("/updateDormitoryUI")
     public ModelAndView updateDormitoryUI(Integer dorId){

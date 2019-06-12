@@ -28,4 +28,11 @@ public class DormitoryServiceImpl implements DormitoryService {
     public Dormitory findDormitoryById(Integer dorId) {
         return dormitoryDao.findDormitoryById(dorId);
     }
+
+    @Override
+    public void deleteById(Integer[] ids) {
+        for (int id : ids){
+            dormitoryDao.deleteById(id);
+        }
+    }
 }

@@ -46,7 +46,7 @@
 		    <tr><td class="font3 fftd">
 		    	<table>
 		    		<tr>
-						<td class="font3 fftd">宿舍楼名称：<input type="text" name="dorName" id="dorName" value="${dormitory.dorName}" size="20"/></td>
+						<td class="font3 fftd">宿舍楼名称：<input disabled type="text" name="dorName" id="dorName" value="${dormitory.dorName}" size="20"/></td>
 
 						<td class="font3 fftd">所属宿管名称：
 

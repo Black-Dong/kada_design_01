@@ -50,10 +50,10 @@
 	 			   var ids = checkedBoxs.map(function(){
 	 				   return this.value;
 	 			   })
-					alert(ids);
+					// alert(ids);
 	 			   $.ligerDialog.confirm("确认要删除吗?","删除信息",function(r){
 	 				   if(r){
-	 				       alert(ids.get())
+	 				       // alert(ids.get())
 	 					   window.location = "${pageContext.request.contextPath }/dormitory/deleteById?ids=" + ids.get();
 	 				   }
 	 			   });
