@@ -35,4 +35,9 @@ public class DormitoryServiceImpl implements DormitoryService {
             dormitoryDao.deleteById(id);
         }
     }
+
+    @Override
+    public void updateDormitory(Dormitory dormitory) {
+        dormitoryDao.updateDormitory(dormitory);
+    }
 }

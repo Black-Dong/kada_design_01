@@ -115,7 +115,7 @@
 			  <td>宿管名称</td>
 			  <td align="center">操作</td>
 			</tr>
-			<c:forEach items="${pageBean.data}" var="room" varStatus="stat">
+			<c:forEach items="${roomList}" var="room" varStatus="stat">
 				<tr id="data_${stat.index}" align="center" class="main_trbg" >
 					<td><input type="checkbox" id="box_${stat.index}" value="${room.roomId}"></td>
 					 <td>${room.roomName}</td>

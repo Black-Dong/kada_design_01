@@ -13,4 +13,6 @@ public interface DormitoryDao {
     Dormitory findDormitoryById(int dorId);
 
     void deleteById(int id);
+
+    void updateDormitory(Dormitory dormitory);
 }

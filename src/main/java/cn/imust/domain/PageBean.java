@@ -18,7 +18,7 @@ public class PageBean<T> {
      *  totalPage  总页数
      */
     private int pageNumber ;
-    private int pageSize ;
+    private int pageSize;
     private int totalRecord ;
     private int startIndex ;
     private int totalPage ;

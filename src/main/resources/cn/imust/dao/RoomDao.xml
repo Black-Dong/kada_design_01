@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.imust.dao.RoomDao">
+
+    <resultMap id="roomMap" type="room">
+        <id column="room_id" property="roomId"></id>
+        <result column="room_name" property="roomName"></result>
+        <association property="dormitory" column="room_dor_id" javaType="dormitory">
+            <id property="dorId" column="dor_id"></id>
+            <!--2.普通字段-->
+            <result column="dor_name" property="dorName"></result>
+            <association property="user" column="user_id" javaType="user">
+                <id property="uid" column="uid"></id>
+
+                <result column="username" property="username"></result>
+                <result column="name" property="name"></result>
+
+                <result column="password" property="password"></result>
+                <result column="status" property="status"></result>
+
+                <result column="create_date" property="createDate"></result>
+                <result column="gender" property="gender"></result>
+                <result column="telephone" property="telephone"></result>
+                <result column="email" property="email"></result>
+            </association>
+        </association>
+    </resultMap>
+
+    <insert id="addRoom" parameterType="room">
+        insert into tbl_room(room_name,room_dor_id) values(#{roomName},#{dormitory.dorId})
+    </insert>
+
+    <select id="findAll" parameterType="pageBeanUI" resultMap="roomMap">
+        select * from tbl_room a,tbl_dormitory b,tbl_user c where a.room_dor_id=b.dor_id and b.user_id = c.uid
+    </select>
+
+</mapper>

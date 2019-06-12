@@ -37,6 +37,10 @@
         select * from tbl_dormitory,tbl_user where tbl_dormitory.user_id = tbl_user.uid and tbl_dormitory.dor_id=#{dorId}
     </select>
 
+    <update id="updateDormitory" parameterType="dormitory">
+        update tbl_dormitory set dor_name=#{dorName},user_id=#{user.uid} where dor_id=#{dorId}
+    </update>
+
     <delete id="deleteById" parameterType="int">
         delete from tbl_dormitory where dor_id=#{id}
     </delete>

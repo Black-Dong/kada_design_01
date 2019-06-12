@@ -28,6 +28,12 @@ public class DormitoryController {
         return "redirect:dormitoryList";
     }
 
+    @RequestMapping("/updateDormitory")
+    public String updateDormitory(Dormitory dormitory){
+        dormitoryService.updateDormitory(dormitory);
+        return "redirect:dormitoryList";
+    }
+
     //点击查询后的回显
     @RequestMapping("/updateDormitoryUI")
     public ModelAndView updateDormitoryUI(Integer dorId){
