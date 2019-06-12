@@ -58,4 +58,14 @@ public class UserServiceImpl implements UserService {
     public void saveUser(User user) {
         userDao.saveUser(user);
     }
+
+    /**
+     * 根据id查询用户
+     * @param uid
+     * @return
+     */
+    @Override
+    public User finduserById(Integer uid) {
+        return userDao.findUserById(uid);
+    }
 }

@@ -15,4 +15,6 @@ public interface UserDao {
     User findUserByNameAndPwd(User user);
 
     void saveUser(User user);
+
+    User findUserById(Integer uid);
 }

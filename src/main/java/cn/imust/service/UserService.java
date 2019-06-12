@@ -15,4 +15,7 @@ public interface UserService {
 
     //保存
     void saveUser(User user);
+
+    //根据id查询用户
+    User finduserById(Integer uid);
 }

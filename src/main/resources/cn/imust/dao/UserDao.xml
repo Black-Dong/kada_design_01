@@ -51,4 +51,8 @@
     <insert id="saveUser" parameterType="user">
         insert into tbl_user values(null , #{username} , #{name},#{password} , #{status} , #{createDate} , #{gender},#{email},#{telephone})
     </insert>
+
+    <select id="findUserById" parameterType="int" resultMap="userMap">
+        select * from tbl_user where uid = #{uid}
+    </select>
 </mapper>

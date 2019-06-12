@@ -26,6 +26,18 @@ public class UserController {
     @Autowired
     private UserService userService;//注入service
 
+
+    @RequestMapping("/updateUserUI")
+    public ModelAndView updateUserUI(Integer uid){
+
+        ModelAndView mv = new ModelAndView();
+        User user = userService.finduserById(uid);
+        mv.addObject("user", user);
+        mv.setViewName("user/showUpdateUser");
+
+        return mv;
+    }
+
     /**
      * 用于登陆的方法
      * @param modelAndView
@@ -75,7 +87,7 @@ public class UserController {
         userService.saveUser(user);
 
         // 返回时 跳转向查询页面 预留
-       return "";
+       return "redirect:userList";
     }
 
     /**
