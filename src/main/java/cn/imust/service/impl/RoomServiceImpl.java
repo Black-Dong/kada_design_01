@@ -1,8 +1,8 @@
 package cn.imust.service.impl;
 
 import cn.imust.dao.RoomDao;
-import cn.imust.domain.PageBeanUI;
 import cn.imust.domain.Room;
+import cn.imust.domain.User;
 import cn.imust.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +16,8 @@ public class RoomServiceImpl implements RoomService {
     private RoomDao roomDao;
 
     @Override
-    public List<Room> findAll(PageBeanUI pageBeanUI) {
-        return roomDao.findAll(pageBeanUI);
+    public List<Room> findAll(User user) {
+        return roomDao.findAll(user);
     }
 
     @Override

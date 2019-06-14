@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -26,14 +27,23 @@ public class RoomController {
 
 
     @RequestMapping("/roomList")
-    public ModelAndView roomList(PageBeanUI pageBeanUI){
+    public ModelAndView roomList(PageBeanUI pageBeanUI, HttpSession session){
 
         ModelAndView mv = new ModelAndView();
-        List<Room> roomList = roomService.findAll(pageBeanUI);
+
+        User user = (User) session.getAttribute("loginUser");
+
+        List<Room> roomList = roomService.findAll(user);
+
         mv.addObject("roomList",roomList);
 
-        List<Dormitory> dormitoryList = dormitoryService.findAll();
+        List<Dormitory> dormitoryList = dormitoryService.findAllByUser(user);
         mv.addObject("dormitoryList",dormitoryList);
+
+        if (pageBeanUI.getRoom() != null){
+            System.out.println(pageBeanUI.getRoom().getDormitory().getUser().getName());
+        }
+
         mv.setViewName("forward:/jsp/room/room.jsp");
 
         return mv;
@@ -51,9 +61,16 @@ public class RoomController {
     }
 
     @RequestMapping("/addRoomUI")
-    public ModelAndView addRoomUI(){
+    public ModelAndView addRoomUI(HttpSession session){
         ModelAndView mv = new ModelAndView();
-        List<Dormitory> dormitoryList = dormitoryService.findAll();
+
+        User user = (User) session.getAttribute("loginUser");
+        List<Dormitory> dormitoryList = null;
+        if ("1".equals(user.getStatus())){
+            dormitoryList = dormitoryService.findAll();
+        }else {
+            dormitoryList= dormitoryService.findAllByUser(user);
+        }
         mv.addObject("dormitoryList",dormitoryList);
         mv.setViewName("forward:/jsp/room/showAddRoom.jsp");
 

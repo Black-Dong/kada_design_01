@@ -32,15 +32,14 @@
         insert into tbl_room(room_name,room_dor_id) values(#{roomName},#{dormitory.dorId})
     </insert>
 
-    <select id="findAll" parameterType="pageBeanUI" resultMap="roomMap">
-        select * from tbl_room a,tbl_dormitory b,tbl_user c where a.room_dor_id=b.dor_id and b.user_id = c.uid
+    <select id="findAll" parameterType="user" resultMap="roomMap">
+        select * from tbl_room r
+            left join tbl_dormitory d on r.room_dor_id = d.dor_id
+            left join tbl_user u on d.user_id = u.uid
         <where>
-            <if test="user != null and user.name != ''">
-                and c.name like '%${user.name}%'
+            <if test="status != null and status == 2">
+                and u.uid = #{uid}
             </if>
-            <!--<if test="dormitory!= null and dormitory.dorId != ''">
-                and b.dorId like '%${dormitory.dorId}%'
-            </if>-->
         </where>
     </select>
 

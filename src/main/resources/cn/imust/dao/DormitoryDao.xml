@@ -29,6 +29,10 @@
         select * from tbl_dormitory,tbl_user where tbl_dormitory.user_id = tbl_user.uid
     </select>
 
+    <select id="findAllByUser" parameterType="user" resultMap="dormitoryMap">
+        select * from tbl_dormitory,tbl_user where tbl_dormitory.user_id = tbl_user.uid and tbl_dormitory.user_id=#{uid}
+    </select>
+
     <insert id="add" parameterType="dormitory">
         insert into tbl_dormitory(dor_name,user_id) values(#{dorName},#{user.uid})
     </insert>
@@ -44,4 +48,6 @@
     <delete id="deleteById" parameterType="int">
         delete from tbl_dormitory where dor_id=#{id}
     </delete>
+
+
 </mapper>
