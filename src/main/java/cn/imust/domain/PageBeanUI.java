@@ -7,6 +7,26 @@ public class PageBeanUI {
     private Room room;
     private BedRoom bedRoom;
 
+    //模糊查询添加
+    private String user_name = "";
+    private String dormitory_dorId = "";
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
+    public String getDormitory_dorId() {
+        return dormitory_dorId;
+    }
+
+    public void setDormitory_dorId(String dormitory_dorId) {
+        this.dormitory_dorId = dormitory_dorId;
+    }
+
     @Override
     public String toString() {
         return "PageBeanUI{" +
@@ -15,6 +35,8 @@ public class PageBeanUI {
                 ", user=" + user +
                 ", room=" + room +
                 ", bedRoom=" + bedRoom +
+                ", user_name='" + user_name + '\'' +
+                ", dormitory_dorId='" + dormitory_dorId + '\'' +
                 ", startIndex=" + startIndex +
                 '}';
     }

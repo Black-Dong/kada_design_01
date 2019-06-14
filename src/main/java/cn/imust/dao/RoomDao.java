@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface RoomDao {
 
-    List<Room> findAll(User user);
+    List<Room> findAll(PageBeanUI pageBeanUI);
 
     void addRoom(Room room);
 }

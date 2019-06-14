@@ -4,10 +4,10 @@ import cn.imust.domain.*;
 import cn.imust.service.BedRoomService;
 import cn.imust.service.DormitoryService;
 import cn.imust.service.RoomService;
+import cn.imust.service.UserService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,19 +28,39 @@ public class RoomController {
     @Autowired
     private BedRoomService bedRoomService;
 
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/roomList")
-    public ModelAndView roomList(@RequestParam(name = "page",required = true,defaultValue = "1") Integer pageIndex,@RequestParam(name = "size",required = true,defaultValue = "2") Integer pageSize, HttpSession session){
+    public ModelAndView roomList(@RequestParam(name = "room.dormitory.user.name",required = false) String name,
+                                 @RequestParam(name = "room.dormitory.dorId",required = false) String dorId,
+                                 @RequestParam(name = "page",required = true,defaultValue = "1") Integer pageIndex,
+                                 @RequestParam(name = "size",required = true,defaultValue = "2") Integer pageSize,
+                                 HttpSession session){
 
         ModelAndView mv = new ModelAndView();
 
         User user = (User) session.getAttribute("loginUser");
 
-        List<Room> roomList = roomService.findAll(user,pageIndex,pageSize);
+        PageBeanUI pageBeanUI = new PageBeanUI();
+        pageBeanUI.setUser(user);
+        if (name != null){
+            pageBeanUI.setUser_name(name);
+        }
+        if (dorId != null){
+            pageBeanUI.setDormitory_dorId(dorId);
+        }
+
+        List<Room> roomList = roomService.findAll(pageBeanUI,pageIndex,pageSize);
 
         PageInfo pageBean = new PageInfo(roomList);
         mv.addObject("pageBean",pageBean);
 
+
+        /*if ("1".equals(user.getStatus())){
+            List<User> userList = userService.findUsers(pageBeanUI);
+            mv.addObject("userList",userList);
+        }*/
         List<Dormitory> dormitoryList = dormitoryService.findAllByUser(user);
         mv.addObject("dormitoryList",dormitoryList);
 

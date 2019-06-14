@@ -1,6 +1,7 @@
 package cn.imust.service.impl;
 
 import cn.imust.dao.RoomDao;
+import cn.imust.domain.PageBeanUI;
 import cn.imust.domain.Room;
 import cn.imust.domain.User;
 import cn.imust.service.RoomService;
@@ -17,7 +18,7 @@ public class RoomServiceImpl implements RoomService {
     private RoomDao roomDao;
 
     @Override
-    public List<Room> findAll(User user,Integer pageIndex,Integer pageSize) {
+    public List<Room> findAll(PageBeanUI pageBeanUI, Integer pageIndex, Integer pageSize) {
 
         if (pageIndex == null){
             pageIndex = 1;
@@ -26,7 +27,7 @@ public class RoomServiceImpl implements RoomService {
             pageSize = 2;
         }
         PageHelper.startPage(pageIndex,pageSize);
-        return roomDao.findAll(user);
+        return roomDao.findAll(pageBeanUI);
     }
 
     @Override

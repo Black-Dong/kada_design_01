@@ -84,8 +84,14 @@
 						  <tr>
 							  <td class="font3">
 								  宿舍管理员：<input type="text" name="room.dormitory.user.name" value="${name}">
+								 <%-- <select name="room.dormitory.user.name">
+									  <option value=""></option>
+									  <c:forEach items="${userList}" var="user">
+										  <option value="${user.uid}">${user.name}</option>
+									  </c:forEach>
+								  </select>--%>
 								  宿舍楼：
-									  <select name="room.dormitory.dorId" id="roomDorId">
+								  <select name="room.dormitory.dorId" id="roomDorId">
 										  <option value="">请选择</option>
 										  <c:forEach items="${dormitoryList}" var="dormitory">
 											  <option value="${dormitory.dorId}">${dormitory.dorName}</option>
@@ -133,6 +139,9 @@
 
 		<script>
 			function userPageMethod(pageNumber){
+
+				// var params = $("#userForm").serialize();
+
 				location.href="${pageContext.request.contextPath}/room/roomList?page="+pageNumber;
 			}
 		</script>
