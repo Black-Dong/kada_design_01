@@ -130,6 +130,13 @@
       <version>${mybatis.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>com.github.pagehelper</groupId>
+      <artifactId>pagehelper</artifactId>
+      <version>5.1.2</version>
+    </dependency>
+
+
     <!--mybatis和spring的整合包-->
     <dependency>
       <groupId>org.mybatis</groupId>

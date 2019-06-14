@@ -7,7 +7,6 @@ import cn.imust.domain.User;
 import java.util.List;
 
 public interface DormitoryService {
-    List<Dormitory> findAll();
 
     void add(Dormitory dormitory);
 

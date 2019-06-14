@@ -27,6 +27,18 @@
         <property name="dataSource" ref="dataSource"/>
         <!--为所有domain起别名-->
         <property name="typeAliasesPackage" value="cn.imust.domain"/>
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <props>
+                            <prop key="helperDialect">mysql</prop>
+                            <prop key="reasonable">true</prop>
+                        </props>
+                    </property>
+                </bean>
+            </array>
+        </property>
     </bean>
     <!--扫描所有mapper的接口-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">

@@ -15,10 +15,6 @@ public class DormitoryServiceImpl implements DormitoryService {
     @Autowired
     private DormitoryDao dormitoryDao;
 
-    @Override
-    public List<Dormitory> findAll() {
-        return dormitoryDao.findAll();
-    }
 
     @Override
     public void add(Dormitory dormitory) {

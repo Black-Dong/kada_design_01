@@ -24,13 +24,16 @@
             <result column="email" property="email"></result>
         </association>
     </resultMap>
-    
-    <select id="findAll" resultMap="dormitoryMap">
-        select * from tbl_dormitory,tbl_user where tbl_dormitory.user_id = tbl_user.uid
-    </select>
+
 
     <select id="findAllByUser" parameterType="user" resultMap="dormitoryMap">
-        select * from tbl_dormitory,tbl_user where tbl_dormitory.user_id = tbl_user.uid and tbl_dormitory.user_id=#{uid}
+        select * from tbl_dormitory,tbl_user
+        <where>
+            and tbl_dormitory.user_id = tbl_user.uid
+            <if test="status != null and status == 2">
+                and tbl_dormitory.user_id=#{uid}
+            </if>
+        </where>
     </select>
 
     <insert id="add" parameterType="dormitory">

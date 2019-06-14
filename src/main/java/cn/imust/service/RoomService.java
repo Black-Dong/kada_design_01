@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface RoomService {
 
-    List<Room> findAll(User user);
+    List<Room> findAll(User user,Integer pageIndex,Integer pageSize);
 
     void addRoom(Room room);
 }

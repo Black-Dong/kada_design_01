@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -66,10 +67,12 @@ public class DormitoryController {
     }
 
     @RequestMapping("/dormitoryList")
-    public ModelAndView dormitoryList(){
+    public ModelAndView dormitoryList(HttpSession session){
 
         ModelAndView mv = new ModelAndView();
-        List<Dormitory> dormitoryList = dormitoryService.findAll();
+
+        User user = (User) session.getAttribute("loginUser");
+        List<Dormitory> dormitoryList =  dormitoryService.findAllByUser(user);
         for (Dormitory dormitory : dormitoryList){
             System.out.println(dormitory);
         }
