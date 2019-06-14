@@ -1,9 +1,7 @@
 package cn.imust.controller;
 
-import cn.imust.domain.Dormitory;
-import cn.imust.domain.PageBean;
-import cn.imust.domain.PageBeanUI;
-import cn.imust.domain.Room;
+import cn.imust.domain.*;
+import cn.imust.service.BedRoomService;
 import cn.imust.service.DormitoryService;
 import cn.imust.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +21,31 @@ public class RoomController {
     @Autowired
     private DormitoryService dormitoryService;
 
+    @Autowired
+    private BedRoomService bedRoomService;
+
+
+    @RequestMapping("/roomList")
+    public ModelAndView roomList(PageBeanUI pageBeanUI){
+
+        ModelAndView mv = new ModelAndView();
+        List<Room> roomList = roomService.findAll(pageBeanUI);
+        mv.addObject("roomList",roomList);
+
+        List<Dormitory> dormitoryList = dormitoryService.findAll();
+        mv.addObject("dormitoryList",dormitoryList);
+        mv.setViewName("forward:/jsp/room/room.jsp");
+
+        return mv;
+    }
+
     @RequestMapping("/addRoom")
     public String addRoom(Room room){
+        //添加宿舍
         roomService.addRoom(room);
+        //添加成功后扩展6个床位
+        BedRoom bedRoom = new BedRoom();
+        bedRoomService.addBedRoom(bedRoom,room);
 
         return "redirect:roomList";
     }
@@ -40,15 +60,4 @@ public class RoomController {
         return mv;
     }
 
-
-    @RequestMapping("/roomList")
-    public ModelAndView roomList(PageBeanUI pageBeanUI){
-
-        ModelAndView mv = new ModelAndView();
-        List<Room> roomList = roomService.findAll(pageBeanUI);
-        mv.addObject("roomList",roomList);
-        mv.setViewName("forward:/jsp/room/room.jsp");
-
-        return mv;
-    }
 }

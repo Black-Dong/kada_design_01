@@ -28,12 +28,20 @@
         </association>
     </resultMap>
 
-    <insert id="addRoom" parameterType="room">
+    <insert id="addRoom" parameterType="room" useGeneratedKeys="true" keyProperty="roomId">
         insert into tbl_room(room_name,room_dor_id) values(#{roomName},#{dormitory.dorId})
     </insert>
 
     <select id="findAll" parameterType="pageBeanUI" resultMap="roomMap">
         select * from tbl_room a,tbl_dormitory b,tbl_user c where a.room_dor_id=b.dor_id and b.user_id = c.uid
+        <where>
+            <if test="user != null and user.name != ''">
+                and c.name like '%${user.name}%'
+            </if>
+            <!--<if test="dormitory!= null and dormitory.dorId != ''">
+                and b.dorId like '%${dormitory.dorId}%'
+            </if>-->
+        </where>
     </select>
 
 </mapper>
