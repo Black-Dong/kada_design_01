@@ -83,7 +83,7 @@
 					  <table width="100%" border="0" cellpadding="0" cellspacing="0">
 						  <tr>
 							  <td class="font3">
-								  宿舍管理员：<input type="text" name="room.dormitory.user.name" value="${name}">
+								  宿舍管理员：<input type="text" id="user_name" name="room.dormitory.user.name" value="${name}">
 								 <%-- <select name="room.dormitory.user.name">
 									  <option value=""></option>
 									  <c:forEach items="${userList}" var="user">
@@ -94,10 +94,15 @@
 								  <select name="room.dormitory.dorId" id="roomDorId">
 										  <option value="">请选择</option>
 										  <c:forEach items="${dormitoryList}" var="dormitory">
-											  <option value="${dormitory.dorId}">${dormitory.dorName}</option>
+											  <c:if test="${dorId == dormitory.dorId}">
+												  <option selected value="${dormitory.dorId}">${dormitory.dorName}</option>
+											  </c:if>
+											  <c:if test="${dorId == null or dorId != dormitory.dorId}">
+												  <option value="${dormitory.dorId}">${dormitory.dorName}</option>
+											  </c:if>
 										  </c:forEach>
 									  </select>
-								  <input type="hidden" id="pageNumberId" name="pageNumber" value="1"/>
+<%--								  <input type="hidden" id="pageNumberId" name="pageNumber" value="1"/>--%>
 								  <input type="submit" value="搜索"/>
 								  <input id="delete" type="button" value="删除"/>
 							  </td>
@@ -140,9 +145,18 @@
 		<script>
 			function userPageMethod(pageNumber){
 
-				// var params = $("#userForm").serialize();
+				var params = $("#userForm").serialize();
+				// alert(params);
 
-				location.href="${pageContext.request.contextPath}/room/roomList?page="+pageNumber;
+				/*var after = "";
+				if (document.getElementById("user_name").value != null) {
+					after += "&room.dormitory.user.name=" + document.getElementById("user_name").value;
+				}
+				if (document.getElementById("roomDorId").value != null){
+					after += "&room.dormitory.dorId=" + document.getElementById("roomDorId").value;
+				}*/
+				// alert(after);
+				location.href="${pageContext.request.contextPath}/room/roomList?page=" + pageNumber + "&" + params;
 			}
 		</script>
 	  <!-- 分页标签 -->

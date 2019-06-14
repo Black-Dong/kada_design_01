@@ -46,9 +46,11 @@ public class RoomController {
         pageBeanUI.setUser(user);
         if (name != null){
             pageBeanUI.setUser_name(name);
+            mv.addObject("name",pageBeanUI.getUser_name());
         }
         if (dorId != null){
             pageBeanUI.setDormitory_dorId(dorId);
+            mv.addObject("dorId",pageBeanUI.getDormitory_dorId());
         }
 
         List<Room> roomList = roomService.findAll(pageBeanUI,pageIndex,pageSize);
