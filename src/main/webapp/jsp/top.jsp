@@ -31,7 +31,8 @@
 			    //location.href=""; 自己页面跳转
                 parent.location = "${pageContext.request.contextPath}/user/loginout";
 			}
-    	})
+    	});
+
 	})
 	
     
@@ -45,7 +46,7 @@
 	<td class="topbg">
 	  <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	    <tr>
-		  <td height="50" class="toplink" align="right"><img src="${pageContext.request.contextPath}/images/top_home.gif">&nbsp;&nbsp;<a href="javascript:void(0);">网站首页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="${pageContext.request.contextPath}/images/top_exit.gif">&nbsp;&nbsp;<a href="javascript:void(0);" id="exit" onclick="">注销退出</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+		  <td height="50" class="toplink" align="right"><img src="${pageContext.request.contextPath}/images/top_home.gif">&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/jsp/right.jsp" target="main">网站首页</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="${pageContext.request.contextPath}/images/top_exit.gif">&nbsp;&nbsp;<a href="javascript:void(0);" id="exit" onclick="">注销退出</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 		</tr>
 		<tr>
 		  <td height="30" class="topnavbg">

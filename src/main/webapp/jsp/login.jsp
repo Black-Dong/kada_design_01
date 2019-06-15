@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
 <head>
@@ -23,12 +24,32 @@
     <script src="${pageContext.request.contextPath}/js/ligerUI/js/plugins/ligerDrag.js" type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/js/ligerUI/js/plugins/ligerDialog.js" type="text/javascript"></script>
     <script>
+
         function loginout(){
             $.ligerDialog.confirm("确认要删除吗?","删除用户",function(r){
                 if(r){
                     window.location = "${pageContext.request.contextPath }/user/deleteById?ids=" + ids.get();
                 }
             });
+        }
+
+        $(function(){
+            var error = GetQueryString("error");
+            console.log("error:" + error);
+            if (error){
+                $("#errorMsg").html("您填写的用户名或密码错误");
+            }
+        })
+        function GetQueryString(name)
+        {
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if(r!=null){
+                return unescape(decodeURI(r[2]));
+                //return unescape(r[2]);
+            }
+
+            return null;
         }
 
     </script>
@@ -51,7 +72,9 @@
                 <table cellspacing="0" cellpadding="0" border="0" width="100%">
                     <tr>
                         <td colspan="2">
-                            <span class="msgSpan" id="errorMsg">${errorMsg}</span>
+                            <span class="msgSpan" id="errorMsg">
+
+                            </span>
                         </td>
                     </tr>
                     <tr>

@@ -38,7 +38,7 @@
                 login-page="/jsp/login.jsp"
                 login-processing-url="/user/loginUser"
                 default-target-url="/user/saveUserToSession"
-                authentication-failure-url="/jsp/login.jsp"
+                authentication-failure-url="/jsp/login.jsp?error=1"
                 username-parameter="username"
                 password-parameter="password"
         />
