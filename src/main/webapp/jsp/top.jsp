@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -50,7 +52,7 @@
 		    <table width="100%" border="0" cellpadding="0" cellspacing="0">
 			  <tr>
 			    <td width="60"><img src="${pageContext.request.contextPath}/images/StatBarL.gif" width="60" height="30"></td>
-				<td class="topnavlh" align="left"><img src="${pageContext.request.contextPath}/images/StatBar_admin.gif">&nbsp;&nbsp;当前用户：【${loginUser.name}】</td>
+				  <td class="topnavlh" align="left"><img src="${pageContext.request.contextPath}/images/StatBar_admin.gif">&nbsp;&nbsp;当前用户：【<security:authentication property="principal.username"></security:authentication>】</td>
 				<td class="topnavlh" align="right"><img src="${pageContext.request.contextPath}/images/StatBar_time.gif">&nbsp;&nbsp;<span id="nowTime"></span>
 				
   			 </td>

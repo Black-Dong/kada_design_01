@@ -5,13 +5,17 @@ import cn.imust.domain.PageBeanUI;
 import cn.imust.domain.User;
 import cn.imust.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Service
+@Service("userService")
 public class UserServiceImpl implements UserService {
 
 
@@ -48,8 +52,8 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User findUserByNameAndPwd(User user) {
-        User loginUser = userDao.findUserByNameAndPwd(user);
-        return loginUser;
+//        User loginUser = userDao.findUserByNameAndPwd(user);
+        return userDao.findByUsername(user.getUsername());
     }
 
     /**
@@ -85,5 +89,34 @@ public class UserServiceImpl implements UserService {
         for (int id : ids){
             userDao.deleteById(id);
         }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User userInfo = null;
+
+        try {
+            userInfo = userDao.findByUsername(username);
+            System.out.println(userInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        org.springframework.security.core.userdetails.User user = new org.springframework.security.core.userdetails.User(userInfo.getUsername(),"{noop}"+userInfo.getPassword(),getAuthority(userInfo));
+
+        return user;
+    }
+
+    /**
+     * 返回一个list集合,集合中封装角色的描述
+     * @return
+     */
+    public List<SimpleGrantedAuthority> getAuthority(User user){
+
+        List<SimpleGrantedAuthority> list = new ArrayList<>();
+        list.add(new SimpleGrantedAuthority("ROLE_"+user.getStatus()));
+
+
+        return list;
     }
 }

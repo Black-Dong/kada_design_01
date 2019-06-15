@@ -2,10 +2,11 @@ package cn.imust.service;
 
 import cn.imust.domain.PageBeanUI;
 import cn.imust.domain.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
 
     //查找用户
     public List<User> findUsers(PageBeanUI pageBeanUI);

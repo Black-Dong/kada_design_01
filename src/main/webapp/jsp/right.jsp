@@ -28,7 +28,7 @@
 		  	<tr valign="top">
 			    <td>
 				  <table width="100%" border="0" cellpadding="0" cellspacing="10" class="main_tab">
-				    <tr><td class="font3 fftd">用户姓名：<font color="red" size="2">${sessionScope.loginUser.name}</font></td></tr>
+				    <tr><td class="font3 fftd">用户姓名：<font color="red" size="2">${loginUser.name}</font></td></tr>
 					<tr><td class="main_tdbor"></td></tr>
 
 					<tr><td class="main_tdbor"></td></tr>

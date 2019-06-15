@@ -5,8 +5,12 @@ import cn.imust.domain.PageBeanUI;
 import cn.imust.domain.User;
 import cn.imust.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -61,6 +65,7 @@ public class UserController {
      * @param modelAndView
      * @return
      */
+    /*
     @RequestMapping("/loginUser")
     public ModelAndView loginUser(User user, ModelAndView modelAndView , HttpSession session){
         //调用service
@@ -78,7 +83,24 @@ public class UserController {
 
         return modelAndView;
     }
+*/
+    @RequestMapping("/saveUserToSession")
+    public String saveUserToSession(HttpSession session){
 
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User loginUser = new User();
+        loginUser.setUsername(userDetails.getUsername());
+        loginUser.setPassword(userDetails.getPassword());
+
+        loginUser = userService.findUserByNameAndPwd(loginUser);
+
+        session.setAttribute("loginUser" , loginUser);//将登陆成功的数据放入session
+
+        System.err.println(loginUser);
+
+        return "main";
+    }
 
     /**
      * 添加用户

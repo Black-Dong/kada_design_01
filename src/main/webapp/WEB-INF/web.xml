@@ -13,7 +13,7 @@
     <init-param>
       <param-name>contextConfigLocation</param-name>
       <!--加载配置文件的时候 应该是加载两个配置文件不是一个-->
-      <param-value>classpath:SpringMVC.xml , classpath:applicationContext.xml</param-value>
+      <param-value>classpath:SpringMVC.xml , classpath:applicationContext.xml, classpath:spring-security.xml</param-value>
     </init-param>
     <!--启动加载-->
     <load-on-startup>1</load-on-startup>
@@ -40,6 +40,16 @@
   </filter>
   <filter-mapping>
     <filter-name>CharacterEncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <!-- 委派过滤器,Spring-Security -->
+  <filter>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>springSecurityFilterChain</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 

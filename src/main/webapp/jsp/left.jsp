@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="seurity" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -37,7 +39,9 @@
 <body>
 	<div style="margin:10px;background-color:#FFFFFF; text-align:left;">
 		<table width="200" height="100%" border="0" cellpadding="0" cellspacing="0" class="left_nav_bg">
-		  <tr><td class="left_nav_top"><div class="font1">宿管管理</div></td></tr>
+
+	<seurity:authorize access="hasRole('ROLE_1')">
+		<tr><td class="left_nav_top"><div class="font1">宿管管理</div></td></tr>
 		  <tr valign="top">
 		    <td class="left_nav_bgshw" height="50">
 			  <p class="left_nav_link"><img src="${pageContext.request.contextPath}/images/left_nav_arrow.gif">&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/user/userList" target="main">宿管查询</a></p>
@@ -54,7 +58,9 @@
 			</td>
 		  </tr>
 		  <tr><td height="2"></td></tr>
-		  
+	</seurity:authorize>
+
+
 		  <tr><td id="navbg2" class="left_nav_closed" ><div class="font1">宿舍管理</div></td></tr>
 		  <tr valign="top" id="submenu2" style="display: none">
 		    <td class="left_nav_bgshw" height="50">

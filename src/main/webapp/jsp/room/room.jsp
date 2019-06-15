@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -83,6 +85,7 @@
 					  <table width="100%" border="0" cellpadding="0" cellspacing="0">
 						  <tr>
 							  <td class="font3">
+								  <security:authorize access="hasRole('ROLE_1')">
 								  宿舍管理员：<input type="text" id="user_name" name="room.dormitory.user.name" value="${name}">
 								 <%-- <select name="room.dormitory.user.name">
 									  <option value=""></option>
@@ -90,6 +93,7 @@
 										  <option value="${user.uid}">${user.name}</option>
 									  </c:forEach>
 								  </select>--%>
+								  </security:authorize>
 								  宿舍楼：
 								  <select name="room.dormitory.dorId" id="roomDorId">
 										  <option value="">请选择</option>
