@@ -12,6 +12,6 @@ public class PageBeanUI {
 
     private Integer pageIndex = 1;
     private Integer pageSize = 10;
-    private Integer navigatePages = 5;
+    private Integer navigatePages = 5;  //导航页条数
 
 }

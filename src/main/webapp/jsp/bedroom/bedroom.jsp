@@ -185,27 +185,8 @@
 					  </a>
 				  </li>
 
-                  <c:choose>
-                      <c:when test="${pageBean.pages <= 5}">
-                          <c:set var="begin" value="1"></c:set>
-                          <c:set var="end" value="${pageBean.pages}"></c:set>
-                      </c:when>
-                      <c:when test="${pageBean.pageNum <= 3}">
-                          <c:set var="begin" value="1"></c:set>
-                          <c:set var="end" value="5"></c:set>
-                      </c:when>
-                      <c:otherwise>
-                          <c:set var="begin" value="${pageBean.pageNum - 2}"></c:set>
-                          <c:set var="end" value="${pageBean.pageNum + 2}"></c:set>
-                          <c:if test="${end > pageBean.pages}">
-                              <c:set var="begin" value="${pageBean.pages - 4}"></c:set>
-                              <c:set var="end" value="${pageBean.pages}"></c:set>
-                          </c:if>
-                      </c:otherwise>
-                  </c:choose>
 
-
-				  <c:forEach begin="${begin}" end="${end}" var="num">
+				  <c:forEach begin="${pageBean.navigateFirstPage}" end="${pageBean.navigateLastPage}" var="num">
 				  	<li ${pageBean.pageNum==num ? 'class="active"' : ""} ><a href="javascript:void(0)" onclick="userPageMethod(${num})">${num}</a></li>
 				  </c:forEach>
 
