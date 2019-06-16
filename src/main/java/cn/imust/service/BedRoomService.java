@@ -12,9 +12,7 @@ public interface BedRoomService {
     /**
      * 查询床位信息列表
      * @param pageBeanUI
-     * @param pageIndex
-     * @param pageSize
      * @return
      */
-    List<BedRoom> findAllBedroom(PageBeanUI pageBeanUI, Integer pageIndex, Integer pageSize);
+    List<BedRoom> findAllBedroom(PageBeanUI pageBeanUI);
 }

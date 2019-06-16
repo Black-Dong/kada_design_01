@@ -38,7 +38,7 @@ public class BedroomController {
 
         pageBeanUI.setLoginUser(loginUser);
 
-        List<BedRoom> bedRoomList = bedRoomService.findAllBedroom(pageBeanUI,pageBeanUI.getPageIndex(),pageBeanUI.getPageSize());
+        List<BedRoom> bedRoomList = bedRoomService.findAllBedroom(pageBeanUI);
         PageInfo<BedRoom> pageBean = new PageInfo<BedRoom>(bedRoomList,pageBeanUI.getNavigatePages());
 
         mv.addObject("pageBeanUI", pageBeanUI);

@@ -28,8 +28,8 @@ public class BedRoomServiceImpl implements BedRoomService {
     }
 
     @Override
-    public List<BedRoom> findAllBedroom(PageBeanUI pageBeanUI, Integer pageIndex, Integer pageSize) {
-        PageHelper.startPage(pageIndex,pageSize);
+    public List<BedRoom> findAllBedroom(PageBeanUI pageBeanUI) {
+        PageHelper.startPage(pageBeanUI.getPageIndex(),pageBeanUI.getPageSize());
         return bedRoomDao.findAllBedroom(pageBeanUI);
     }
 }

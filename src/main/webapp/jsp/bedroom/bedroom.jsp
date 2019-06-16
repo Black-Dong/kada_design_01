@@ -95,8 +95,8 @@
 								  是否空床：
 								  <select name="bedRoom.isFlag">
 								  	 <option value="">请选择</option>
-										<option value="Y" ${pageBeanUI.bedRoom.isFlag=="N" ? "selected":""}>是</option>
-										<option value="N" ${pageBeanUI.bedRoom.isFlag=="Y" ? "selected":""}>否</option>
+										<option value="Y" ${pageBeanUI.bedRoom.isFlag=="Y" ? "selected":""}>否</option>
+										<option value="N" ${pageBeanUI.bedRoom.isFlag=="N" ? "selected":""}>是</option>
 									  </select>
 							  		</select>
 									<input type="hidden" id="pageNumberId" name="pageIndex" value="1"/>
