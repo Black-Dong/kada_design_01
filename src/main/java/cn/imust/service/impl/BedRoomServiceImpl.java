@@ -1,6 +1,7 @@
 package cn.imust.service.impl;
 
 import cn.imust.dao.BedRoomDao;
+import cn.imust.dao.StudentDao;
 import cn.imust.domain.BedRoom;
 import cn.imust.domain.PageBeanUI;
 import cn.imust.domain.Room;
@@ -17,6 +18,9 @@ public class BedRoomServiceImpl implements BedRoomService {
     @Autowired
     private BedRoomDao bedRoomDao;
 
+    @Autowired
+    private StudentDao studentDao;
+
     @Override
     public void addBedRoom(BedRoom bedRoom, Room room) {
         for (int i=0; i<6; i++){
@@ -31,5 +35,21 @@ public class BedRoomServiceImpl implements BedRoomService {
     public List<BedRoom> findAllBedroom(PageBeanUI pageBeanUI) {
         PageHelper.startPage(pageBeanUI.getPageIndex(),pageBeanUI.getPageSize());
         return bedRoomDao.findAllBedroom(pageBeanUI);
+    }
+
+    @Override
+    public BedRoom findBedroomById(Integer bedId) {
+        return bedRoomDao.findBedroomById(bedId);
+    }
+
+    @Override
+    public void inRoom(BedRoom bedRoom) {
+
+        //操作 student 表
+        studentDao.addStudent(bedRoom);
+
+        //更新 room 的 bedroom
+        bedRoomDao.updateBedRoom(bedRoom);
+
     }
 }

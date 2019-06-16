@@ -11,4 +11,8 @@ public interface BedRoomDao {
     void addBedRoom(BedRoom bedRoom);
 
     List<BedRoom> findAllBedroom(PageBeanUI pageBeanUI);
+
+    BedRoom findBedroomById(Integer bedId);
+
+    void updateBedRoom(BedRoom bedRoom);
 }

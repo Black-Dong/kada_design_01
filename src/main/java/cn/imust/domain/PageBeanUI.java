@@ -8,6 +8,7 @@ public class PageBeanUI {
     private User user;
     private Room room;
     private BedRoom bedRoom;
+    private Student student;
     private User loginUser;
 
     private Integer pageIndex = 1;

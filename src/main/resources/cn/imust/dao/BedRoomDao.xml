@@ -77,4 +77,18 @@
             </if>
         </where>
     </select>
+
+    <select id="findBedroomById" parameterType="int" resultMap="bedRoomMap">
+        select * from tbl_bedroom b
+            left join tbl_room r on b.room_id = r.room_id
+            left join tbl_dormitory d on r.room_dor_id = d.dor_id
+            left join tbl_user u on d.user_id = u.uid
+            left join tbl_student s on b.stu_id = s.stu_id
+            where b.bed_id = #{bedId}
+    </select>
+
+    <update id="updateBedRoom" parameterType="bedRoom">
+        update tbl_bedroom set is_flag = 'Y',room_id = #{room.roomId},stu_id = #{student.stuId}
+        where bed_id = #{bedId}
+    </update>
 </mapper>

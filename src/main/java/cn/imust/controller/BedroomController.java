@@ -27,6 +27,27 @@ public class BedroomController {
     @Autowired
     private DormitoryService dormitoryService;
 
+    //入住
+    @RequestMapping("/inRoom")
+    public String inRoom(BedRoom bedRoom){
+
+        bedRoomService.inRoom(bedRoom);
+
+        return "redirect:bedRoomList";
+    }
+
+
+    //入住跳转
+    @RequestMapping("/inRoomUI")
+    public ModelAndView inRoomUI(Integer bedId){
+        ModelAndView mv = new ModelAndView();
+        BedRoom bedRoom = bedRoomService.findBedroomById(bedId);
+
+        mv.addObject("bedRoom", bedRoom);
+        mv.setViewName("forward:/jsp/bedroom/showAddBedRoom.jsp");
+        return mv;
+    }
+
     @RequestMapping("/bedRoomList")
     public ModelAndView bedRoomList(PageBeanUI pageBeanUI,HttpSession session){
 
