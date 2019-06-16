@@ -32,28 +32,23 @@ public class RoomController {
     private UserService userService;
 
     @RequestMapping("/roomList")
-    public ModelAndView roomList(@RequestParam(name = "room.dormitory.user.name",required = false) String name,
-                                 @RequestParam(name = "room.dormitory.dorId",required = false) String dorId,
-                                 @RequestParam(name = "page",required = true,defaultValue = "1") Integer pageIndex,
-                                 @RequestParam(name = "size",required = true,defaultValue = "2") Integer pageSize,
-                                 HttpSession session){
+    public ModelAndView roomList(PageBeanUI pageBeanUI,HttpSession session){
 
         ModelAndView mv = new ModelAndView();
 
-        User user = (User) session.getAttribute("loginUser");
+        User loginUser = (User) session.getAttribute("loginUser");
 
-        PageBeanUI pageBeanUI = new PageBeanUI();
-        pageBeanUI.setUser(user);
-        if (name != null){
-            pageBeanUI.setUser_name(name);
-            mv.addObject("name",pageBeanUI.getUser_name());
-        }
-        if (dorId != null){
-            pageBeanUI.setDormitory_dorId(dorId);
-            mv.addObject("dorId",pageBeanUI.getDormitory_dorId());
+        pageBeanUI.setLoginUser(loginUser);
+        if (pageBeanUI.getRoom() != null){
+            if (pageBeanUI.getRoom().getDormitory().getUser().getName() != null){
+                mv.addObject("name",pageBeanUI.getRoom().getDormitory().getUser().getName());
+            }
+            if (pageBeanUI.getRoom().getDormitory().getDorId() != null){
+                mv.addObject("dorId",pageBeanUI.getRoom().getDormitory().getDorId());
+            }
         }
 
-        List<Room> roomList = roomService.findAll(pageBeanUI,pageIndex,pageSize);
+        List<Room> roomList = roomService.findAll(pageBeanUI,pageBeanUI.getPageIndex(),pageBeanUI.getPageSize());
 
         PageInfo pageBean = new PageInfo(roomList);
         mv.addObject("pageBean",pageBean);
@@ -63,7 +58,7 @@ public class RoomController {
             List<User> userList = userService.findUsers(pageBeanUI);
             mv.addObject("userList",userList);
         }*/
-        List<Dormitory> dormitoryList = dormitoryService.findAllByUser(user);
+        List<Dormitory> dormitoryList = dormitoryService.findAllByUser(loginUser);
         mv.addObject("dormitoryList",dormitoryList);
 
 

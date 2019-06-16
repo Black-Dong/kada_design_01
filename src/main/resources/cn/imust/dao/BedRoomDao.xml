@@ -3,7 +3,78 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.imust.dao.BedRoomDao">
+
+    <resultMap id="bedRoomMap" type="bedRoom">
+        <id property="bedId" column="bed_id"/>
+        <result column="room_bed_name" property="roomBedName"/>
+        <result column="is_flag" property="isFlag"/>
+        <association property="room" column="room_id" javaType="room">
+            <id column="room_id" property="roomId"></id>
+            <result column="room_name" property="roomName"></result>
+            <association property="dormitory" column="room_dor_id" javaType="dormitory">
+                <id property="dorId" column="dor_id"></id>
+                <!--2.普通字段-->
+                <result column="dor_name" property="dorName"></result>
+                <association property="user" column="user_id" javaType="user" autoMapping="true">
+                    <id property="uid" column="uid"></id>
+
+                    <result column="username" property="username"></result>
+                    <result column="name" property="name"></result>
+
+                    <result column="password" property="password"></result>
+                    <result column="status" property="status"></result>
+
+                    <result column="create_date" property="createDate"></result>
+                    <result column="gender" property="gender"></result>
+                    <result column="telephone" property="telephone"></result>
+                    <result column="email" property="email"></result>
+                </association>
+            </association>
+        </association>
+
+        <association property="student" column="stu_id" javaType="student">
+            <id column="stu_id" property="stuId"/>
+            <result column="stu_name" property="stuName"/>
+            <result column="stu_phone" property="stuPhone"/>
+            <result column="stu_family_phone" property="stuFamilyPhone"/>
+            <result column="stu_teacher_name" property="stuTeacherName"/>
+            <result column="stu_teacher_phone" property="stuTeacherPhone"/>
+            <result column="stu_gender" property="stuGender"/>
+            <result column="stu_address" property="stuAddress"/>
+            <result column="room_name" property="roomName"/>
+        </association>
+    </resultMap>
+
     <insert id="addBedRoom" parameterType="bedRoom">
         insert into tbl_bedroom (room_bed_name,is_flag,room_id) values(#{roomBedName},#{isFlag},#{room.roomId})
     </insert>
+
+    <select id="findAllBedroom" parameterType="pageBeanUI" resultMap="bedRoomMap">
+        select * from tbl_bedroom b
+            left join tbl_room r on b.room_id = r.room_id
+            left join tbl_dormitory d on r.room_dor_id = d.dor_id
+            left join tbl_user u on d.user_id = u.uid
+            left join tbl_student s on b.stu_id = s.stu_id
+
+        <where>
+            <if test="loginUser != null and loginUser.status != null and loginUser.status == 2">
+                and u.uid = #{loginUser.uid}
+            </if>
+            <if test="bedRoom != null">
+                <if test="bedRoom.isFlag != ''">
+                    and b.is_flag = #{bedRoom.isFlag}
+                </if>
+                <if test="bedRoom.room != null">
+                    <if test="bedRoom.room.roomName != ''">
+                        and r.room_name like '%${bedRoom.room.roomName}%'
+                    </if>
+                </if>
+                <if test="bedRoom.room.dormitory != null">
+                    <if test="bedRoom.room.dormitory.dorId != null">
+                        and d.dor_id = #{bedRoom.room.dormitory.dorId}
+                    </if>
+                </if>
+            </if>
+        </where>
+    </select>
 </mapper>

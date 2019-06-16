@@ -98,12 +98,7 @@
 								  <select name="room.dormitory.dorId" id="roomDorId">
 										  <option value="">请选择</option>
 										  <c:forEach items="${dormitoryList}" var="dormitory">
-											  <c:if test="${dorId == dormitory.dorId}">
-												  <option selected value="${dormitory.dorId}">${dormitory.dorName}</option>
-											  </c:if>
-											  <c:if test="${dorId == null or dorId != dormitory.dorId}">
-												  <option value="${dormitory.dorId}">${dormitory.dorName}</option>
-											  </c:if>
+											  <option ${dorId==dormitory.dorId ? "selected":""} value="${dormitory.dorId}">${dormitory.dorName}</option>
 										  </c:forEach>
 									  </select>
 <%--								  <input type="hidden" id="pageNumberId" name="pageNumber" value="1"/>--%>
@@ -160,7 +155,7 @@
 					after += "&room.dormitory.dorId=" + document.getElementById("roomDorId").value;
 				}*/
 				// alert(after);
-				location.href="${pageContext.request.contextPath}/room/roomList?page=" + pageNumber + "&" + params;
+				location.href="${pageContext.request.contextPath}/room/roomList?pageIndex=" + pageNumber + "&" + params;
 			}
 		</script>
 	  <!-- 分页标签 -->

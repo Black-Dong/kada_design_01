@@ -95,11 +95,11 @@
 								  是否空床：
 								  <select name="bedRoom.isFlag">
 								  	 <option value="">请选择</option>
-										<option value="Y" ${pageBeanUI.bedRoom.isFlag=="Y" ? "selected":""}>是</option>
-										<option value="N" ${pageBeanUI.bedRoom.isFlag=="N" ? "selected":""}>否</option>
+										<option value="Y" ${pageBeanUI.bedRoom.isFlag=="N" ? "selected":""}>是</option>
+										<option value="N" ${pageBeanUI.bedRoom.isFlag=="Y" ? "selected":""}>否</option>
 									  </select>
 							  		</select>
-								  <input type="hidden" id="pageNumberId" name="pageNumber" value="1"/>
+								  <input type="hidden" id="pageNumberId" name="pageIndex" value="1"/>
 								  <input type="submit" value="搜索"/>
 
 							  </td>
@@ -128,7 +128,7 @@
 			  <td>性别</td>
 
 			</tr>
-			<c:forEach items="${pageBean.data}" var="bedRoom" varStatus="stat">
+			<c:forEach items="${pageBean.list}" var="bedRoom" varStatus="stat">
 				<tr id="data_${stat.index}" align="center" class="main_trbg" >
 					<td><input type="checkbox" id="box_${stat.index}" value="${user.uid}"></td>
 					 <td>${bedRoom.room.dormitory.dorName }</td>
@@ -156,8 +156,9 @@
 		<script>
 			function userPageMethod(pageNumber){
 				$("#pageNumberId").val(pageNumber);
-				var params = $("#userForm").serialize();
-				location.href="${pageContext.request.contextPath}/user/userList?"+params;
+				var params = $("#bedRoomForm").serialize();
+				alert(params);
+				location.href="${pageContext.request.contextPath}/bedroom/bedRoomList?"+params;
 			}
 			function outRoom(bedId){
                 $.ligerDialog.confirm("确认要退住吗?","退住",function(r){
@@ -178,21 +179,21 @@
 					  </a>
 				  </li>
 				  <li>
-					  <a href="javascript:void(0)" onclick="userPageMethod(${pageBean.pageNumber-1})"  aria-label="Previous">
+					  <a href="javascript:void(0)" onclick="userPageMethod(${pageBean.pageNum-1})"  aria-label="Previous">
 						  <span aria-hidden="true">上页</span>
 					  </a>
 				  </li>
 
-				  <c:forEach begin="${pageBean.start}" end="${pageBean.end}" var="num">
-				  	<li ${pageBean.pageNumber==num ? 'class="active"' : ""} ><a href="javascript:void(0)" onclick="userPageMethod(${num})">${num}</a></li>
+				  <c:forEach begin="1" end="${pageBean.pages}" var="num">
+				  	<li ${pageBean.pageNum==num ? 'class="active"' : ""} ><a href="javascript:void(0)" onclick="userPageMethod(${num})">${num}</a></li>
 				  </c:forEach>
 				  <li>
-					  <a href="javascript:void(0)" onclick="userPageMethod(${pageBean.pageNumber+1})" aria-label="Next">
+					  <a href="javascript:void(0)" onclick="userPageMethod(${pageBean.pageNum+1})" aria-label="Next">
 						  <span aria-hidden="true">下页</span>
 					  </a>
 				  </li>
 				  <li>
-					  <a href="javascript:void(0)" onclick="userPageMethod(${pageBean.totalPage})" aria-label="Next">
+					  <a href="javascript:void(0)" onclick="userPageMethod(${pageBean.pages})" aria-label="Next">
 						  <span aria-hidden="true">&raquo;</span>
 					  </a>
 				  </li>
