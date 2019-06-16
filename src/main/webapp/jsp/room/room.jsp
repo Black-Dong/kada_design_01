@@ -101,7 +101,7 @@
 											  <option ${dorId==dormitory.dorId ? "selected":""} value="${dormitory.dorId}">${dormitory.dorName}</option>
 										  </c:forEach>
 									  </select>
-<%--								  <input type="hidden" id="pageNumberId" name="pageNumber" value="1"/>--%>
+								  <input type="hidden" id="pageNumberId" name="pageIndex" value="1"/>
 								  <input type="submit" value="搜索"/>
 								  <input id="delete" type="button" value="删除"/>
 							  </td>
@@ -144,6 +144,7 @@
 		<script>
 			function userPageMethod(pageNumber){
 
+				$("#pageNumberId").val(pageNumber);
 				var params = $("#userForm").serialize();
 				// alert(params);
 
@@ -155,7 +156,7 @@
 					after += "&room.dormitory.dorId=" + document.getElementById("roomDorId").value;
 				}*/
 				// alert(after);
-				location.href="${pageContext.request.contextPath}/room/roomList?pageIndex=" + pageNumber + "&" + params;
+				location.href="${pageContext.request.contextPath}/room/roomList?" + params;
 			}
 		</script>
 	  <!-- 分页标签 -->
@@ -173,10 +174,31 @@
 					  </a>
 				  </li>
 
+
+				  <c:choose>
+					  <c:when test="${pageBean.pages <= 5}">
+						  <c:set var="begin" value="1"></c:set>
+						  <c:set var="end" value="${pageBean.pages}"></c:set>
+					  </c:when>
+					  <c:when test="${pageBean.pageNum <= 3}">
+						  <c:set var="begin" value="1"></c:set>
+						  <c:set var="end" value="5"></c:set>
+					  </c:when>
+					  <c:otherwise>
+						  <c:set var="begin" value="${pageBean.pageNum - 2}"></c:set>
+						  <c:set var="end" value="${pageBean.pageNum + 2}"></c:set>
+						  <c:if test="${end > pageBean.pages}">
+							  <c:set var="begin" value="${pageBean.pages - 4}"></c:set>
+							  <c:set var="end" value="${pageBean.pages}"></c:set>
+						  </c:if>
+					  </c:otherwise>
+				  </c:choose>
 				  <%--<c:forEach begin="${pageBean.start}" end="${pageBean.end}" var="num">--%>
-				  <c:forEach begin="1" end="${pageBean.pages}" var="num">
+				  <c:forEach begin="${begin}" end="${end}" var="num">
 				  	<li ${pageBean.pageNum==num ? 'class="active"' : ""} ><a href="javascript:void(0)" onclick="userPageMethod(${num})">${num}</a></li>
 				  </c:forEach>
+
+
 				  <li>
 					  <a href="javascript:void(0)" onclick="userPageMethod(${pageBean.pageNum+1})" aria-label="Next">
 						  <span aria-hidden="true">下页</span>

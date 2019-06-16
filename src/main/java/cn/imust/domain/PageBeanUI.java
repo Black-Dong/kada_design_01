@@ -11,6 +11,7 @@ public class PageBeanUI {
     private User loginUser;
 
     private Integer pageIndex = 1;
-    private Integer pageSize = 2;
+    private Integer pageSize = 10;
+    private Integer navigatePages = 5;
 
 }
