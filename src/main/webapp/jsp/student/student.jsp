@@ -5,7 +5,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-	<title>宿舍管理系统 ——用户管理</title>
+	<title>宿舍管理系统 ——学生管理</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv="pragma" content="no-cache" />
 	<meta http-equiv="cache-control" content="no-cache" />
@@ -67,7 +67,7 @@
 	  <tr><td height="10"></td></tr>
 	  <tr>
 	    <td width="15" height="32"><img src="${pageContext.request.contextPath}/images/main_locleft.gif" width="15" height="32"></td>
-		<td class="main_locbg font2"><img src="${pageContext.request.contextPath}/images/pointer.gif">&nbsp;&nbsp;&nbsp;当前位置：用户管理 &gt; 用户查询</td>
+		<td class="main_locbg font2"><img src="${pageContext.request.contextPath}/images/pointer.gif">&nbsp;&nbsp;&nbsp;当前位置：学生管理 &gt; 学生查询</td>
 		<td width="15" height="32"><img src="${pageContext.request.contextPath}/images/main_locright.gif" width="15" height="32"></td>
 	  </tr>
 	</table>
@@ -79,12 +79,16 @@
 		  <table width="100%" border="0" cellpadding="0" cellspacing="10" class="main_tab">
 		    <tr>
 			  <td class="fftd">
-				  <form name="userForm" method="post" id="userForm" action="${pageContext.request.contextPath}/user/userList">
+				  <form name="userForm" method="post" id="userForm" action="${pageContext.request.contextPath}/student/studentList">
 					  <table width="100%" border="0" cellpadding="0" cellspacing="0">
 						  <tr>
 							  <td class="font3">
-								  用户名：<input type="text" name="user.username" value="${username}">
-								  用户状态：<input type="text" name="user.status" value="${status}">
+								  学员姓名：<input type="text" name="student.stuName" value="${username}">
+								  宿舍楼：
+								  <select name="dormitory.dorId">
+									  <option value="">请选择</option>
+								  </select>
+								  宿舍：<input type="text" name="room.roomName.room." value="">
 								  <input type="hidden" id="pageNumberId" name="pageNumber" value="1"/>
 								  <input type="submit" value="搜索"/>
 								  <input id="delete" type="button" value="删除"/>
@@ -104,29 +108,33 @@
 		  <table width="100%" border="1" cellpadding="5" cellspacing="0" style="border:#c2c6cc 1px solid; border-collapse:collapse;">
 		    <tr class="main_trbg_tit" align="center">
 			  <td><input type="checkbox" name="checkAll" id="checkAll"></td>
-			  <td>登录名</td>
 			  <td>姓名</td>
-			  <td>密码</td>
-			  <td>用户状态</td>
-			  <td>最后修改时间</td>
+			  <td>电话</td>
+			  <td>家庭电话</td>
+			  <td>导师</td>
+			  <td>导师电话</td>
 			  <td>性别</td>
-			  <td>邮箱</td>
-			  <td>联系电话</td>
+			  <td>家庭住址</td>
+			  <td>床位</td>
+			  <td>宿舍</td>
+			  <td>宿舍楼</td>
 			  <td align="center">操作</td>
 			</tr>
-			<c:forEach items="${pageBean.data}" var="user" varStatus="stat">
+			<c:forEach items="${pageBean.list}" var="student" varStatus="stat">
 				<tr id="data_${stat.index}" align="center" class="main_trbg" >
-					<td><input type="checkbox" id="box_${stat.index}" value="${user.uid}"></td>
-					 <td>${user.username}</td>
-					  <td>${user.name }</td>
-					  <td>${user.password }</td>
-					  <td>${user.status }</td>
-					  <td>${user.createDate }</td>
-					  <td>${user.gender }</td>
-					  <td>${user.email }</td>
-					  <td>${user.telephone }</td>
+					<td><input type="checkbox" id="box_${stat.index}" value="${student.stuId}"></td>
+					 <td>${student.stuName}</td>
+					  <td>${student.stuPhone }</td>
+					  <td>${student.stuFamilyPhone }</td>
+					  <td>${student.stuTeacherName }</td>
+					  <td>${student.stuTeacherPhone }</td>
+					  <td>${student.stuGender }</td>
+					  <td>${student.stuAddress }</td>
+					  <td>${student.room.bedRoom.roomBedName }</td>
+					  <td>${student.room.roomName }</td>
+					  <td>${student.room.dormitory.dorName }</td>
 
-					 <td align="center" width="40px;"><a href="${pageContext.request.contextPath}/user/updateUserUI?uid=${user.uid}">
+					 <td align="center" width="40px;"><a href="${pageContext.request.contextPath}/student/updateStudentUI?stuId=${student.stuId}">
 							<img title="修改" src="${pageContext.request.contextPath}/images/update.gif"/></a>
 					  </td>
 				</tr>
@@ -152,21 +160,21 @@
 					  </a>
 				  </li>
 				  <li>
-					  <a href="javascript:void(0)" onclick="userPageMethod(${pageBean.pageNumber-1})"  aria-label="Previous">
+					  <a href="javascript:void(0)" onclick="userPageMethod(${pageBean.prePage})"  aria-label="Previous">
 						  <span aria-hidden="true">上页</span>
 					  </a>
 				  </li>
 
-				  <c:forEach begin="${pageBean.start}" end="${pageBean.end}" var="num">
-				  	<li ${pageBean.pageNumber==num ? 'class="active"' : ""} ><a href="javascript:void(0)" onclick="userPageMethod(${num})">${num}</a></li>
+				  <c:forEach begin="${pageBean.navigateFirstPage}" end="${pageBean.navigateLastPage}" var="num">
+				  	<li ${pageBean.pageNum==num ? 'class="active"' : ""} ><a href="javascript:void(0)" onclick="userPageMethod(${num})">${num}</a></li>
 				  </c:forEach>
 				  <li>
-					  <a href="javascript:void(0)" onclick="userPageMethod(${pageBean.pageNumber+1})" aria-label="Next">
+					  <a href="javascript:void(0)" onclick="userPageMethod(${pageBean.nextPage})" aria-label="Next">
 						  <span aria-hidden="true">下页</span>
 					  </a>
 				  </li>
 				  <li>
-					  <a href="javascript:void(0)" onclick="userPageMethod(${pageBean.totalPage})" aria-label="Next">
+					  <a href="javascript:void(0)" onclick="userPageMethod(${pageBean.pages})" aria-label="Next">
 						  <span aria-hidden="true">&raquo;</span>
 					  </a>
 				  </li>

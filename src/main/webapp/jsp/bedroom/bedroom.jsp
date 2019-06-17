@@ -164,7 +164,7 @@
 			function outRoom(bedId){
                 $.ligerDialog.confirm("确认要退住吗?","退住",function(r){
                     if(r){
-                        alert(bedId);
+                        // alert(bedId);
                         window.location = "${pageContext.request.contextPath }/bedroom/outRoom?bedId=" + bedId;
                     }
                 });

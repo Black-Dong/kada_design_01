@@ -82,7 +82,7 @@
 		  <tr><td id="navbg4" class="left_nav_closed" ><div class="font1">学生管理</div></td></tr>
 		  <tr valign="top" id="submenu4" style="display: none">
 		    <td class="left_nav_bgshw tdbtmline" height="50">
-			  <p class="left_nav_link"><img src="${pageContext.request.contextPath}/images/left_nav_arrow.gif">&nbsp;&nbsp;<a href="${pageContext.request.contextPath }/notice/selectNotice" target="main">学生查询</a></p>
+			  <p class="left_nav_link"><img src="${pageContext.request.contextPath}/images/left_nav_arrow.gif">&nbsp;&nbsp;<a href="${pageContext.request.contextPath }/student/studentList" target="main">学生查询</a></p>
 			  <p class="left_nav_link"><img src="${pageContext.request.contextPath}/images/left_nav_arrow.gif">&nbsp;&nbsp;<a href="${pageContext.request.contextPath }/notice/addNotice?flag=1" target="main">添加学生</a></p>
 			</td>
 		  </tr>

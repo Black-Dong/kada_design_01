@@ -5,15 +5,48 @@
 <mapper namespace="cn.imust.dao.StudentDao">
 
     <resultMap id="studentMap" type="student">
-        <id column="stu_id" property="stuId"/>
-        <result column="stu_name" property="stuName"/>
-        <result column="stu_phone" property="stuPhone"/>
-        <result column="stu_family_phone" property="stuFamilyPhone"/>
-        <result column="stu_teacher_name" property="stuTeacherName"/>
-        <result column="stu_teacher_phone" property="stuTeacherPhone"/>
-        <result column="stu_gender" property="stuGender"/>
-        <result column="stu_address" property="stuAddress"/>
-        <result column="room_name" property="roomName"/>
+        <!--主键-->
+        <id column="stu_id" property="stuId"></id>
+        <!--普通字段-->
+        <result column="stu_name" property="stuName"></result>
+        <result column="stu_phone" property="stuPhone"></result>
+        <result column="stu_family_phone" property="stuFamilyPhone"></result>
+        <result column="stu_teacher_name" property="stuTeacherName"></result>
+        <result column="stu_teacher_phone" property="stuTeacherPhone"></result>
+        <result column="stu_gender" property="stuGender"></result>
+        <result column="stu_address" property="stuAddress"></result>
+        <result column="room_name" property="roomName"></result>
+        <!--外键 对象-->
+        <association property="room" javaType="room" >
+            <!--主键-->
+            <id column="room_id" property="roomId"></id>
+            <!--普通字段-->
+            <result column="room_name" property="roomName"></result>
+            <!--外键字段-->
+            <association property="dormitory" javaType="dormitory">
+                <!--主键-->
+                <id column="dor_id" property="dorId"></id>
+                <!--普通字段-->
+                <result column="dor_name" property="dorName"></result>
+                <!--外键字段-->
+                <association property="user" javaType="user" autoMapping="true">
+                    <result column="create_date" property="createDate"></result>
+                </association>
+            </association>
+
+            <association property="bedRoom" javaType="bedRoom" column="bed_room_id">
+                <!--主键-->
+                <id column="bed_id" property="bedId"></id>
+                <!--普通字段-->
+                <result column="room_bed_name" property="roomBedName"></result>
+                <result column="is_flag" property="isFlag"></result>
+                <result column="room_bed_name" property="roomBedName"></result>
+                <!--<result column="stu_id" property=""></result>
+                <result column="room_id" property=""></result>-->
+                <!--外键字段-->
+            </association>
+
+        </association>
     </resultMap>
 
     <insert id="addStudent" parameterType="bedRoom" useGeneratedKeys="true" keyProperty="student.stuId">
@@ -26,4 +59,26 @@
     <delete id="deleteStudentById" parameterType="int">
         delete from tbl_student where stu_id = #{value}
     </delete>
+
+    <select id="studentList" parameterType="pageBeanUI" resultMap="studentMap">
+        select * from tbl_student s
+            left join tbl_bedroom b on s.bed_room_id = b.bed_id
+            left join tbl_room r on b.room_id = r.room_id
+            left join tbl_dormitory d on r.room_dor_id = d.dor_id
+            left join tbl_user u on d.user_id = u.uid
+        <where>
+            <if test="loginUser != null and loginUser.status != null and loginUser.status == 2">
+                and u.uid = #{loginUser.uid}
+            </if>
+            <if test="student != null">
+                and s.stu_name like '%${student.stuName}%'
+            </if>
+            <if test="dormitory != null">
+                and d.dor_name = #{dormitory.dorName}
+            </if>
+            <if test="room != null">
+                and r.room_name like '%${room.roomName}%'
+            </if>
+        </where>
+    </select>
 </mapper>
