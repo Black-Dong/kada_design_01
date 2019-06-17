@@ -73,7 +73,7 @@
             <if test="student != null">
                 and s.stu_name like '%${student.stuName}%'
             </if>
-            <if test="dormitory != null">
+            <if test="dormitory != null and dormitory.dorName != ''">
                 and d.dor_name = #{dormitory.dorName}
             </if>
             <if test="room != null">

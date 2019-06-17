@@ -83,13 +83,21 @@
 					  <table width="100%" border="0" cellpadding="0" cellspacing="0">
 						  <tr>
 							  <td class="font3">
-								  学员姓名：<input type="text" name="student.stuName" value="${username}">
+								  学员姓名：<input type="text" name="student.stuName" value="${stuName}">
 								  宿舍楼：
-								  <select name="dormitory.dorId">
+								  <select name="dormitory.dorName">
 									  <option value="">请选择</option>
+									  <c:forEach items="${dormitoryList}" var="dormitory">
+										  <c:if test="${dormitory.dorName == dorName}">
+											  <option selected value="${dormitory.dorName}">${dormitory.dorName}</option>
+										  </c:if>
+										  <c:if test="${dormitory.dorName != dorName}">
+											  <option value="${dormitory.dorName}">${dormitory.dorName}</option>
+										  </c:if>
+									  </c:forEach>
 								  </select>
-								  宿舍：<input type="text" name="room.roomName.room." value="">
-								  <input type="hidden" id="pageNumberId" name="pageNumber" value="1"/>
+								  宿舍：<input type="text" name="room.roomName" value="${roomName}">
+								  <input type="hidden" id="pageNumberId" name="pageIndex" value="1"/>
 								  <input type="submit" value="搜索"/>
 								  <input id="delete" type="button" value="删除"/>
 							  </td>

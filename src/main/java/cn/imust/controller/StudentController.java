@@ -37,6 +37,15 @@ public class StudentController {
         List<Student> studentList = studentService.studentList(pageBeanUI);
         PageInfo pageBean = new PageInfo(studentList,5);
 
+        if (pageBeanUI.getStudent() != null){
+            mv.addObject("stuName",pageBeanUI.getStudent().getStuName());
+        }
+        if (pageBeanUI.getDormitory() != null){
+            mv.addObject("dorName",pageBeanUI.getDormitory().getDorName());
+        }
+        if (pageBeanUI.getRoom() != null){
+            mv.addObject("roomName",pageBeanUI.getRoom().getRoomName());
+        }
 
         mv.addObject("dormitoryList",dormitoryList);
         mv.addObject("pageBean",pageBean);
