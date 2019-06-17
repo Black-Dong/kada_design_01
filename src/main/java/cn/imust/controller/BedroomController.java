@@ -27,6 +27,15 @@ public class BedroomController {
     @Autowired
     private DormitoryService dormitoryService;
 
+    //退住
+    @RequestMapping("/outRoom")
+    public String outRoom(Integer bedId){
+        BedRoom bedRoom = bedRoomService.findBedroomById(bedId);
+
+        bedRoomService.outRoom(bedRoom);
+        return "redirect:bedRoomList";
+    }
+
     //入住
     @RequestMapping("/inRoom")
     public String inRoom(BedRoom bedRoom){

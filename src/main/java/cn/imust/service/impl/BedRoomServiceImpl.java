@@ -52,4 +52,14 @@ public class BedRoomServiceImpl implements BedRoomService {
         bedRoomDao.updateBedRoom(bedRoom);
 
     }
+
+    @Override
+    public void outRoom(BedRoom bedRoom) {
+
+        studentDao.deleteStudentById(bedRoom.getStudent().getStuId());
+        bedRoom.setIsFlag("N");
+        bedRoom.getStudent().setStuId(0);
+        bedRoomDao.updateBedRoom(bedRoom);
+
+    }
 }

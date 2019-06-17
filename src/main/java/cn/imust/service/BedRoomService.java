@@ -20,4 +20,6 @@ public interface BedRoomService {
     BedRoom findBedroomById(Integer bedId);
 
     void inRoom(BedRoom bedRoom);
+
+    void outRoom(BedRoom bedRoom);
 }

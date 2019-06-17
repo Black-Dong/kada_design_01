@@ -16,9 +16,14 @@
         <result column="room_name" property="roomName"/>
     </resultMap>
 
-    <insert id="addStudent" parameterType="bedRoom" useGeneratedKeys="true" keyProperty="stuId">
+    <insert id="addStudent" parameterType="bedRoom" useGeneratedKeys="true" keyProperty="student.stuId">
         insert into tbl_student value (null,#{student.stuName},#{student.stuPhone},#{student.stuFamilyPhone},
             #{student.stuTeacherName},#{student.stuTeacherPhone},#{student.stuGender},#{student.stuAddress},
-            #{student.roomName},#{student.room.bedRoom.bedId})
+            #{student.roomName},#{bedId})
     </insert>
+
+
+    <delete id="deleteStudentById" parameterType="int">
+        delete from tbl_student where stu_id = #{value}
+    </delete>
 </mapper>

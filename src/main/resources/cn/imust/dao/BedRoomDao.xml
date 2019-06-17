@@ -88,7 +88,7 @@
     </select>
 
     <update id="updateBedRoom" parameterType="bedRoom">
-        update tbl_bedroom set is_flag = 'Y',room_id = #{room.roomId},stu_id = #{student.stuId}
+        update tbl_bedroom set is_flag = #{isFlag},room_id = #{room.roomId},stu_id = #{student.stuId}
         where bed_id = #{bedId}
     </update>
 </mapper>

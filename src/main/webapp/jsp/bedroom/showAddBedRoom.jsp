@@ -49,12 +49,12 @@
 		    		<tr>
 		    			<td class="font3 fftd">&nbsp;宿舍楼：
 							<input name="bedId" type="hidden" value="${bedRoom.bedId}" size="20" />
-							<input disabled name="room.bedRoom.dormitory.dorId" id="dorId" value="${bedRoom.room.dormitory.dorName}" size="20" />
+							<input readonly name="room.dormitory.dorName" id="dorId" value="${bedRoom.room.dormitory.dorName}" size="20" />
 							<input name="isFlag" type="hidden" id="isFlag" value="Y" size="20" />
 						</td>
 
-		    			<td class="font3 fftd">宿&nbsp;&nbsp;舍：<input disabled type="text" name="room.roomName" id="roomName" size="20" value="${bedRoom.room.roomName}"/>
-							<input type="hidden"  name="room.roomId" size="20" ${bedRoom.room.roomId}/>
+		    			<td class="font3 fftd">宿&nbsp;&nbsp;舍：<input readonly type="text" name="student.roomName" id="roomName" size="20" value="${bedRoom.room.roomName}"/>
+							<input type="hidden"  name="room.roomId" size="20" value="${bedRoom.room.roomId}"/>
 						</td>
 		    		</tr>
 		    			
