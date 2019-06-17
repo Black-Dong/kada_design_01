@@ -21,10 +21,25 @@
 	<script src="${pageContext.request.contextPath}/js/ligerUI/js/plugins/ligerResizable.jss" type="text/javascript"></script>
 	<link href="${pageContext.request.contextPath}/css/pager.css" type="text/css" rel="stylesheet" />
 	<script type="text/javascript">
-	
 
-		
-
+		function changeRoom(roomSelect) {
+			var roomId=  roomSelect.value;
+			$.ajax({
+				url:'${pageContext.request.contextPath}/student/getAjaxRoomList',
+				data:'{"dorId":"'+dorId+'"}',
+				type:'post',
+				dataType:'json',
+				success:function(data){
+					var tempStr = "";
+					$(data).each(function(){
+						tempStr+="<option value='"+this.bedId+"'>"+this.roomBedName+"</option>";
+					});
+					alert(tempStr);
+					$("#bedRoomId").html(tempStr);
+				},
+				contentType:'application/json;charset=UTF-8'
+			})
+		}
 	</script>
 </head>
 	<body>
