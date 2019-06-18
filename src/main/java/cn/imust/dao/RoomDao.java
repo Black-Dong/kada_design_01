@@ -18,4 +18,6 @@ public interface RoomDao {
     Room finRoomById(Integer roomId);
 
     void deleteRoomById(int id);
+
+    Integer[] findRoomIdByDorId(int id);
 }

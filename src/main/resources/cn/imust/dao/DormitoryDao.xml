@@ -52,5 +52,4 @@
         delete from tbl_dormitory where dor_id=#{id}
     </delete>
 
-
 </mapper>

@@ -21,6 +21,7 @@ public class DormitoryController {
     @Autowired
     private UserService userService;
 
+    //根据宿舍楼id删除宿舍楼
     @RequestMapping("/deleteById")
     public String deleteById(Integer[] ids){
 
@@ -29,6 +30,7 @@ public class DormitoryController {
         return "redirect:dormitoryList";
     }
 
+    //修改宿舍楼
     @RequestMapping("/updateDormitory")
     public String updateDormitory(Dormitory dormitory){
         dormitoryService.updateDormitory(dormitory);
@@ -48,7 +50,7 @@ public class DormitoryController {
         return mv;
     }
 
-
+    //添加宿舍楼
     @RequestMapping("/add")
     public String add(Dormitory dormitory){
 
@@ -57,6 +59,7 @@ public class DormitoryController {
         return "redirect:dormitoryList";
     }
 
+    //展示添加页面
     @RequestMapping("/showAdd")
     public ModelAndView showAdd(){
         ModelAndView mv = new ModelAndView();
@@ -66,6 +69,7 @@ public class DormitoryController {
         return mv;
     }
 
+    //获取宿舍楼列表(包括模糊查询)
     @RequestMapping("/dormitoryList")
     public ModelAndView dormitoryList(HttpSession session){
 

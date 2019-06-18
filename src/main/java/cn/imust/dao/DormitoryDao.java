@@ -18,4 +18,5 @@ public interface DormitoryDao {
     void updateDormitory(Dormitory dormitory);
 
     List<Dormitory> findAllByUser(User user);
+
 }

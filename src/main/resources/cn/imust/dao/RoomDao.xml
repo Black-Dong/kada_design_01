@@ -65,4 +65,8 @@
     <delete id="deleteRoomById" parameterType="int">
         delete from tbl_room where room_id = #{value }
     </delete>
+
+    <select id="findRoomIdByDorId" parameterType="int" resultType="int">
+        select room_id from tbl_room where room_dor_id = #{value }
+    </select>
 </mapper>
