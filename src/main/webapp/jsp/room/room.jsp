@@ -46,16 +46,16 @@
 	 		   /** 获取到用户选中的复选框  */
 	 		   var checkedBoxs = boxs.filter(":checked");
 	 		   if(checkedBoxs.length < 1){
-	 			   $.ligerDialog.error("请选择一个需要删除的用户！");
+	 			   $.ligerDialog.error("请选择一个需要删除的宿舍！");
 	 		   }else{
 	 			   /** 得到用户选中的所有的需要删除的ids */
 	 			   var ids = checkedBoxs.map(function(){
 	 				   return this.value;
 	 			   })
 
-	 			   $.ligerDialog.confirm("确认要删除吗?","删除用户",function(r){
+	 			   $.ligerDialog.confirm("确认要删除吗?","删除宿舍",function(r){
 	 				   if(r){
-	 					   window.location = "${pageContext.request.contextPath }/user/deleteById?ids=" + ids.get();
+	 					   window.location = "${pageContext.request.contextPath }/room/deleteById?ids=" + ids.get();
 	 				   }
 	 			   });
 	 		   }

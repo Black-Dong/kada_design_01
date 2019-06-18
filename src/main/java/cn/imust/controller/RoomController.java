@@ -28,9 +28,17 @@ public class RoomController {
     @Autowired
     private BedRoomService bedRoomService;
 
-    @Autowired
-    private UserService userService;
+    //删除宿舍(同时删除床位和学生)
+    @RequestMapping("/deleteById")
+    public String deleteById(Integer[] ids){
+        for (int id:ids) {
+            roomService.deleteRoomById(id);
+        }
 
+        return "redirect:roomList";
+    }
+
+    //查询宿舍列表 （包括分页及模糊查询）
     @RequestMapping("/roomList")
     public ModelAndView roomList(PageBeanUI pageBeanUI,HttpSession session){
 
@@ -67,6 +75,7 @@ public class RoomController {
         return mv;
     }
 
+    //添加宿舍
     @RequestMapping("/addRoom")
     public String addRoom(Room room){
         //添加宿舍
@@ -78,6 +87,7 @@ public class RoomController {
         return "redirect:roomList";
     }
 
+    //跳转到添加宿舍
     @RequestMapping("/addRoomUI")
     public ModelAndView addRoomUI(HttpSession session){
         ModelAndView mv = new ModelAndView();

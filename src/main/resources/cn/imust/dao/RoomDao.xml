@@ -61,4 +61,8 @@
     <select id="finRoomById" parameterType="int" resultMap="roomMap">
         select * from tbl_room where room_id = #{value}
     </select>
+
+    <delete id="deleteRoomById" parameterType="int">
+        delete from tbl_room where room_id = #{value }
+    </delete>
 </mapper>

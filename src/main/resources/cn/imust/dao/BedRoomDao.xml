@@ -99,4 +99,12 @@
     <select id="findBedroomByStudentId" parameterType="int" resultMap="bedRoomMap">
         select * from tbl_bedroom where stu_id = #{value }
     </select>
+
+    <select id="findStuIdsByRoomId" parameterType="int" resultType="int">
+        select stu_id from tbl_bedroom where room_id = #{value }
+    </select>
+
+    <delete id="deleteByRoomId" parameterType="int">
+        delete from tbl_bedroom where room_id = #{value }
+    </delete>
 </mapper>

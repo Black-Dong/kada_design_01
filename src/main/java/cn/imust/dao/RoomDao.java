@@ -16,4 +16,6 @@ public interface RoomDao {
     List<Room> findAllRoomByDormitory(Dormitory dormitory);
 
     Room finRoomById(Integer roomId);
+
+    void deleteRoomById(int id);
 }

@@ -19,4 +19,8 @@ public interface BedRoomDao {
     List<BedRoom> findAllBedroomByRoom(Room room);
 
     BedRoom findBedroomByStudentId(int id);
+
+    Integer[] findStuIdsByRoomId(int id);
+
+    void deleteByRoomId(int id);
 }
