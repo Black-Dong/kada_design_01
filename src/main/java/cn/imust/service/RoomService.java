@@ -1,9 +1,7 @@
 package cn.imust.service;
 
 
-import cn.imust.domain.PageBeanUI;
-import cn.imust.domain.Room;
-import cn.imust.domain.User;
+import cn.imust.domain.*;
 
 import java.util.List;
 
@@ -12,4 +10,7 @@ public interface RoomService {
     List<Room> findAll(PageBeanUI pageBeanUI,Integer pageIndex,Integer pageSize);
 
     void addRoom(Room room);
+
+    List<Room> findAllRoomByDormitory(Dormitory dormitory);
+
 }

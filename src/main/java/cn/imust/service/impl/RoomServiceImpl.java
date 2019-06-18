@@ -1,9 +1,7 @@
 package cn.imust.service.impl;
 
 import cn.imust.dao.RoomDao;
-import cn.imust.domain.PageBeanUI;
-import cn.imust.domain.Room;
-import cn.imust.domain.User;
+import cn.imust.domain.*;
 import cn.imust.service.RoomService;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +31,10 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public void addRoom(Room room) {
         roomDao.addRoom(room);
+    }
+
+    @Override
+    public List<Room> findAllRoomByDormitory(Dormitory dormitory) {
+        return roomDao.findAllRoomByDormitory(dormitory);
     }
 }

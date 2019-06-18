@@ -21,50 +21,90 @@
 	<script src="${pageContext.request.contextPath}/js/ligerUI/js/plugins/ligerDialog.js" type="text/javascript"></script>
 	<script src="${pageContext.request.contextPath}/js/ligerUI/js/plugins/ligerResizable.jss" type="text/javascript"></script>
 	<link href="${pageContext.request.contextPath}/css/pager.css" type="text/css" rel="stylesheet" />
-	<script type="text/javascript">
-		function changeRoom(roomSelect) {
-            var roomId=  roomSelect.value;
-            $.ajax({
-				url:'${pageContext.request.contextPath}/student/changeRoom',
-                data:'{"roomId":"'+roomId+'"}',
-				type:'post',
-				dataType:'json',
-				success:function(data){
-				    var tempStr = "";
-				    $(data).each(function(){
-				        tempStr+="<option value='"+this.bedId+"'>"+this.roomBedName+"</option>";
-					});
-				    alert(tempStr);
-					$("#bedRoomId").html(tempStr);
-				},
-				contentType:'application/json;charset=UTF-8'
-			})
-        }
+		<script type="text/javascript">
+            //修改宿舍楼时  查询宿舍的信息
+            function changeDormitory(dorSelect){
+                //当修改宿舍楼时 访问服务器 动态的获得信息
+                $.ajax({
+                    url:"${pageContext.request.contextPath}/room/getAjaxRoomList",//访问路径
+                    data:'{"dorId":"'+dorSelect.value+'"}' , //请求参数 {"key":"value"}
+                    dataType : "json", //返回值类型
+                    type:"post", //请求类型
+                    success:function(data){
+                        var tempStr = "<option value=''>请选择</option>";//设置option信息
+                        $(data).each(function(){
 
-		
+                            //开始拼接下拉框 注意 this等效每一个room对象
+                            tempStr+="<option value="+this.roomId+">"+this.roomName+"</option>";
+                        });
 
-	</script>
+                        //重新赋值 下拉框数据
+                        $("#roomSelect").html(tempStr);
+                    },//成功的回调函数
+                    contentType:"application/json;charset=utf-8"//请求的的数据类型
+                });
+            }
+
+
+            function changeRoom(roomSelect){
+                //当修改宿舍时 访问服务器 动态的获得信息
+                $.ajax({
+                    url:"${pageContext.request.contextPath}/bedroom/getAjaxBedRoomList",//访问路径
+                    data:'{"roomId":"'+roomSelect.value+'"}' , //请求参数 {"key":"value"}
+                    dataType : "json", //返回值类型
+                    type:"post", //请求类型
+                    success:function(data){
+                        var tempStr = "<option value=''>请选择</option>";//设置option信息
+                        $(data).each(function(){
+
+                            //开始拼接下拉框 注意 this等效每一个room对象
+                            tempStr+="<option value="+this.bedId+">"+this.roomBedName+"</option>";
+                        });
+
+                        //重新赋值 下拉框数据
+                        $("#bedRoomSelect").html(tempStr);
+                    },//成功的回调函数
+                    contentType:"application/json;charset=utf-8"//请求的的数据类型
+                });
+            }
+		</script>
 </head>
 <body>
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr valign="top">
 		<td>
 			<form action="${pageContext.request.contextPath}/student/updateStudent" id="studentForm" method="post">
-				<input name="stuId" type="hidden" id="stuId" value="${student.stuId}" size="20" />
+
 				<table width="100%" border="0" cellpadding="0" cellspacing="10" class="main_tab">
 					<tr><td class="font3 fftd">
 						<table>
 							<tr>
 								<td class="font3 fftd">&nbsp;宿舍楼：
-									<select>
-										<option value="${student.bedRoom.room.dormitory.dorId}">${student.bedRoom.room.dormitory.dorName}</option>
+									<select name="dormitory.dorId" onchange="changeDormitory(this)">
+										<option value="">请选择</option>
+										<%--<option value="${student.room.dormitory.dorId}">${student.room.dormitory.dorName}</option>--%>
+										<c:forEach items="${dormitoryList}" var="dormitory">
+											<c:if test="${dormitory.dorId==student.room.dormitory.dorId}">
+												<option selected value="${dormitory.dorId}">${dormitory.dorName}</option>
+											</c:if>
+											<c:if test="${dormitory.dorId!=student.room.dormitory.dorId}">
+												<option  value="${dormitory.dorId}">${dormitory.dorName}</option>
+											</c:if>
+										</c:forEach>
 									</select>
-								</td>
+ 								</td>
 
 								<td class="font3 fftd">宿&nbsp;&nbsp;舍：
-									<select id="roomSelect" name="bedRoom.room.roomId" onchange="changeRoom(this)">
+									<select id="roomSelect" onchange="changeRoom(this)" name="room.roomId" onchange="changeRoom(this)">
+										<option value="">请选择</option>
+										<%--<option value="${student.room.roomId}">${student.room.roomName}</option>--%>
 										<c:forEach items="${roomList}" var="room">
-											<option ${student.bedRoom.room.roomId ==room.roomId ?"selected" : ""} value="${room.roomId}">${room.roomName}</option>
+											<c:if test="${room.roomId == student.room.roomId}">
+												<option selected value="${room.roomId}">${room.roomName}</option>
+											</c:if>
+											<c:if test="${room.roomId != student.room.roomId}">
+												<option  value="${room.roomId}">${room.roomName}</option>
+											</c:if>
 										</c:forEach>
 									</select>
 								</td>
@@ -72,12 +112,16 @@
 
 							<tr>
 								<td class="font3 fftd">床&nbsp;&nbsp;位：
-									<select name="bedRoom.bedId" id="bedRoomId">
-										<option selected value="${student.bedRoom.bedId}">${student.bedRoom.roomBedName}</option>
+									<select id="bedRoomSelect"  name="bedRoom.bedId" id="bedRoomId">
+										<option value="">请选择</option>
+										/*只是学员有床位的情况 如果学生床位不为空 显示即可*/
+										<c:if test="${not empty student.room}">
+											<option  selected value="${student.room.bedRoom.bedId}">${student.room.bedRoom.roomBedName}</option>
+										</c:if>
 										<c:forEach items="${bedRoomList}" var="bedRoom">
-											<option value="${bedRoom.bedId}">${bedRoom.roomBedName}</option>
+												/*此处因为 查询出来的都是空床  不可能和学生已经入住的床比对*/
+												<option value="${bedRoom.bedId}">${bedRoom.roomBedName}</option>
 										</c:forEach>
-
 									</select>
 								</td>
 
@@ -85,20 +129,23 @@
 							</tr>
 
 							<tr>
-								<td class="font3 fftd">姓&nbsp;&nbsp;名：<input name="stuName" id="stuName" value="${student.stuName}" size="20" /></td>
-								<td class="font3 fftd">电&nbsp;&nbsp;话：<input name="stuPhone" id="stuPhone" value="${student.stuPhone}" size="20" /></td>
+								<td class="font3 fftd">姓&nbsp;&nbsp;名：
+									<%--隐藏域存放id属性--%>
+									<input type="hidden" value="${student.stuId}" name="student.stuId"/>
+									<input name="student.stuName" id="stuName" value="${student.stuName}" size="20" /></td>
+								<td class="font3 fftd">电&nbsp;&nbsp;话：<input name="student.stuPhone" id="stuPhone" value="${student.stuPhone}" size="20" /></td>
 							</tr>
 							<tr>
-								<td class="font3 fftd">家庭电话：<input name="stuFamilyPhone" id="stuFamilyPhone" value="${student.stuFamilyPhone}" size="20" /></td>
-								<td class="font3 fftd">学员导师：<input name="stuTeacherName" id="stuTeacherName" value="${student.stuTeacherName}" size="20" /></td>
+								<td class="font3 fftd">家庭电话：<input name="student.stuFamilyPhone" id="stuFamilyPhone" value="${student.stuFamilyPhone}" size="20" /></td>
+								<td class="font3 fftd">学员导师：<input name="student.stuTeacherName" id="stuTeacherName" value="${student.stuTeacherName}" size="20" /></td>
 							</tr>
 							<tr>
-								<td class="font3 fftd">导师电话：<input name="stuTeacherPhone" id="stuTeacherPhone" value="${student.stuTeacherPhone}" size="20" /></td>
-								<td class="font3 fftd">家庭住址：<input name="stuAddress" id="stuAddress" size="20" value="${student.stuAddress}" /></td>
+								<td class="font3 fftd">导师电话：<input name="student.stuTeacherPhone" id="stuTeacherPhone" value="${student.stuTeacherPhone}" size="20" /></td>
+								<td class="font3 fftd">家庭住址：<input name="student.stuAddress" id="stuAddress" size="20" value="${student.stuAddress}" /></td>
 							</tr>
 							<tr>
 								<td class="font3 fftd">性&nbsp;&nbsp;别：
-									<select name ="stuGender" id="stuGender" >
+									<select name ="student.stuGender" id="stuGender" >
 										<option value="">请选择</option>
 										<option ${student.stuGender=="男" ? "selected" : ""} value="男">男</option>
 										<option  ${student.stuGender=="女" ? "selected" : ""} value="女">女</option>

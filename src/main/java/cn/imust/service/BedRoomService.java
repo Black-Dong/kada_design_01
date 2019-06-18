@@ -10,11 +10,7 @@ import java.util.List;
 public interface BedRoomService {
     void addBedRoom(BedRoom bedRoom,Room room);
 
-    /**
-     * 查询床位信息列表
-     * @param pageBeanUI
-     * @return
-     */
+    // TODO: 2019/6/17 查询床位信息列表
     List<BedRoom> findAllBedroom(PageBeanUI pageBeanUI);
 
     BedRoom findBedroomById(Integer bedId);
@@ -22,4 +18,6 @@ public interface BedRoomService {
     void inRoom(BedRoom bedRoom);
 
     void outRoom(BedRoom bedRoom);
+
+    List<BedRoom> findAllBedroomByRoom(Room room);
 }

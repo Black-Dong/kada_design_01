@@ -62,4 +62,10 @@ public class BedRoomServiceImpl implements BedRoomService {
         bedRoomDao.updateBedRoom(bedRoom);
 
     }
+
+    @Override
+    public List<BedRoom> findAllBedroomByRoom(Room room) {
+        return bedRoomDao.findAllBedroomByRoom(room);
+    }
+
 }

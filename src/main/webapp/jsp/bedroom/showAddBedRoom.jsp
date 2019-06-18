@@ -53,7 +53,8 @@
 							<input name="isFlag" type="hidden" id="isFlag" value="Y" size="20" />
 						</td>
 
-		    			<td class="font3 fftd">宿&nbsp;&nbsp;舍：<input readonly type="text" name="student.roomName" id="roomName" size="20" value="${bedRoom.room.roomName}"/>
+		    			<td class="font3 fftd">宿&nbsp;&nbsp;舍：
+							<input readonly type="text" name="student.roomName" id="roomName" size="20" value="${bedRoom.room.roomName}"/>
 							<input type="hidden"  name="room.roomId" size="20" value="${bedRoom.room.roomId}"/>
 						</td>
 		    		</tr>

@@ -53,4 +53,8 @@
         </where>
     </select>
 
+
+    <select id="findAllRoomByDormitory" parameterType="dormitory" resultMap="roomMap">
+        select * from tbl_room where room_dor_id = #{dorId}
+    </select>
 </mapper>

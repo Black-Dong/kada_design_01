@@ -88,7 +88,11 @@
     </select>
 
     <update id="updateBedRoom" parameterType="bedRoom">
-        update tbl_bedroom set is_flag = #{isFlag},room_id = #{room.roomId},stu_id = #{student.stuId}
+        update tbl_bedroom set is_flag = #{isFlag},stu_id = #{student.stuId}
         where bed_id = #{bedId}
     </update>
+
+    <select id="findAllBedroomByRoom" parameterType="room" resultMap="bedRoomMap">
+        select * from tbl_bedroom where room_id=#{roomId} and is_flag = 'N'
+    </select>
 </mapper>
