@@ -53,7 +53,7 @@
 
 	 			   $.ligerDialog.confirm("确认要删除吗?","删除用户",function(r){
 	 				   if(r){
-	 					   window.location = "${pageContext.request.contextPath }/user/deleteById?ids=" + ids.get();
+	 					   window.location = "${pageContext.request.contextPath }/student/deleteById?ids=" + ids.get();
 	 				   }
 	 			   });
 	 		   }
@@ -155,7 +155,7 @@
 			function userPageMethod(pageNumber){
 				$("#pageNumberId").val(pageNumber);
 				var params = $("#userForm").serialize();
-				location.href="${pageContext.request.contextPath}/user/userList?"+params;
+				location.href="${pageContext.request.contextPath}/student/studentList?"+params;
 			}
 		</script>
 	  <!-- 分页标签 -->

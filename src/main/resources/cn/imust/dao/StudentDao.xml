@@ -49,13 +49,14 @@
         </association>
     </resultMap>
 
+    <!--添加学生-->
     <insert id="addStudent" parameterType="bedRoom" useGeneratedKeys="true" keyProperty="student.stuId">
         insert into tbl_student value (null,#{student.stuName},#{student.stuPhone},#{student.stuFamilyPhone},
             #{student.stuTeacherName},#{student.stuTeacherPhone},#{student.stuGender},#{student.stuAddress},
             #{student.roomName},#{bedId})
     </insert>
 
-
+    <!--通过id删除学生-->
     <delete id="deleteStudentById" parameterType="int">
         delete from tbl_student where stu_id = #{value}
     </delete>

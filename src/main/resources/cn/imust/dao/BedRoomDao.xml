@@ -95,4 +95,8 @@
     <select id="findAllBedroomByRoom" parameterType="room" resultMap="bedRoomMap">
         select * from tbl_bedroom where room_id=#{roomId} and is_flag = 'N'
     </select>
+
+    <select id="findBedroomByStudentId" parameterType="int" resultMap="bedRoomMap">
+        select * from tbl_bedroom where stu_id = #{value }
+    </select>
 </mapper>

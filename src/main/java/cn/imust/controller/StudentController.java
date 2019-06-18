@@ -32,6 +32,18 @@ public class StudentController {
     @Autowired
     private BedRoomService bedRoomService;
 
+    //和退住一样
+    @RequestMapping("/deleteById")
+    public String deleteById(Integer[] ids){
+
+        for (int id:ids) {
+            //需要执行删除学生, 修改床位信息 和退住一样
+            studentService.deleteStudentById(id);
+        }
+
+        return "redirect:studentList";
+    }
+
     // Done: 2019/6/17 添加用户
     @RequestMapping("/addStudent")
     public String addStudent(BedRoom bedRoom){

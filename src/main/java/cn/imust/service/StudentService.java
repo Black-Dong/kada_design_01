@@ -11,4 +11,6 @@ public interface StudentService {
     List<Student> studentList(PageBeanUI pageBeanUI);
 
     void addStudent(BedRoom bedRoom);
+
+    void deleteStudentById(int id);
 }

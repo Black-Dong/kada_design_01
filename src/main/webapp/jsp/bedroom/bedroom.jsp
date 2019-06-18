@@ -100,7 +100,6 @@
 									  </select>
 							  		</select>
 									<input type="hidden" id="pageNumberId" name="pageIndex" value="1"/>
-									<input type="hidden" id="pageSizeId" name="pageSize" value="10"/>
 								  <input type="submit" value="搜索"/>
 
 							  </td>

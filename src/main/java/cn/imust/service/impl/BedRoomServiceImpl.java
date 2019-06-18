@@ -45,7 +45,7 @@ public class BedRoomServiceImpl implements BedRoomService {
     @Override
     public void inRoom(BedRoom bedRoom) {
 
-        //操作 student 表
+        //操作 student 表 --添加学生
         studentDao.addStudent(bedRoom);
 
         //更新 room 的 bedroom
@@ -56,7 +56,10 @@ public class BedRoomServiceImpl implements BedRoomService {
     @Override
     public void outRoom(BedRoom bedRoom) {
 
+        //删除学生--通过id
         studentDao.deleteStudentById(bedRoom.getStudent().getStuId());
+
+        //修改床位信息
         bedRoom.setIsFlag("N");
         bedRoom.getStudent().setStuId(0);
         bedRoomDao.updateBedRoom(bedRoom);

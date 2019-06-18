@@ -45,4 +45,18 @@ public class StudentServiceImpl implements StudentService {
         bedRoom.setIsFlag("Y");
         bedRoomDao.updateBedRoom(bedRoom);
     }
+
+    @Override
+    public void deleteStudentById(int id) {
+
+        //删除学生--通过id
+        studentDao.deleteStudentById(id);
+
+        //修改床位信息
+            //通过学生id查找对应床位
+        BedRoom bedRoom = bedRoomDao.findBedroomByStudentId(id);
+        bedRoom.setIsFlag("N");
+        bedRoom.getStudent().setStuId(0);
+        bedRoomDao.updateBedRoom(bedRoom);
+    }
 }

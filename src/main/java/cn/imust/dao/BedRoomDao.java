@@ -17,4 +17,6 @@ public interface BedRoomDao {
     void updateBedRoom(BedRoom bedRoom);
 
     List<BedRoom> findAllBedroomByRoom(Room room);
+
+    BedRoom findBedroomByStudentId(int id);
 }
