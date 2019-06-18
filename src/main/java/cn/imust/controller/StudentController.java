@@ -32,15 +32,15 @@ public class StudentController {
     @Autowired
     private BedRoomService bedRoomService;
 
-    // TODO: 2019/6/17 添加用户
+    // Done: 2019/6/17 添加用户
     @RequestMapping("/addStudent")
     public String addStudent(BedRoom bedRoom){
-        // TODO: 2019/6/17 和床位添加类似
+        // Done: 2019/6/17 和床位添加类似  1.添加学生 2.修改床位信息
         studentService.addStudent(bedRoom);
         return "redirect:studentList";
     }
 
-    // TODO: 2019/6/17 ajax 异步请求实现根据room(宿舍)查询所有空床位
+    // Done: 2019/6/17 ajax 异步请求实现根据room(宿舍)查询所有空床位
     @RequestMapping("/getAjaxBedRoomList")
     public @ResponseBody List<BedRoom> getAjaxBedRoomList(@RequestBody Room room){
         List<BedRoom> bedRoomList = bedRoomService.findAllBedroomByRoom(room);
@@ -49,7 +49,7 @@ public class StudentController {
         return bedRoomList;
     }
 
-    // TODO: 2019/6/17 ajax 根据请求实现根据dormitory(宿舍楼)查询所有宿舍
+    // Done: 2019/6/17 ajax 根据请求实现根据dormitory(宿舍楼)查询所有宿舍
     @RequestMapping("/getAjaxRoomList")
     public @ResponseBody List<Room> getAjaxRoomList(@RequestBody Dormitory dormitory){
         List<Room> roomList = roomService.findAllRoomByDormitory(dormitory);
@@ -58,7 +58,7 @@ public class StudentController {
         return roomList;
     }
 
-    // TODO: 2019/6/17 跳转到添加用户页面
+    // Done: 2019/6/17 跳转到添加用户页面
     @RequestMapping("/addStudentUI")
     public ModelAndView addStudent(HttpSession session){
         ModelAndView mv = new ModelAndView();
@@ -70,7 +70,7 @@ public class StudentController {
         return mv;
     }
 
-    // TODO: 2019/6/17 学生列表 --包括模糊查询及分页
+    // Done: 2019/6/17 学生列表 --包括模糊查询及分页
     @RequestMapping("/studentList")
     public ModelAndView studentList(PageBeanUI pageBeanUI,HttpSession session){
         ModelAndView mv = new ModelAndView();
