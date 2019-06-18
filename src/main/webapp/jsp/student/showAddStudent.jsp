@@ -81,7 +81,7 @@
 								<tr>
 									<td class="font3 fftd">&nbsp;宿舍楼：
 
-										<select name="dormitory.dorId" onchange="changeDormitory(this)">
+										<select name="room.dormitory.dorId" onchange="changeDormitory(this)">
 											<option value="">请选择</option>
 											<c:forEach items="${dormitoryList}" var = "dormitory">
 												<option value="${dormitory.dorId}">${dormitory.dorName}</option>
@@ -98,7 +98,7 @@
 
 								<tr>
 									<td class="font3 fftd">床&nbsp;&nbsp;位：
-										<select id="bedRoomSelect" name="bedRoom.bedId" id="bedRoomId">
+										<select id="bedRoomSelect" name="bedId" id="bedRoomId">
 											<option value="">请选择</option>
 										</select>
 									</td>

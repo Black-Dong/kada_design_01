@@ -14,4 +14,6 @@ public interface RoomDao {
     void addRoom(Room room);
 
     List<Room> findAllRoomByDormitory(Dormitory dormitory);
+
+    Room finRoomById(Integer roomId);
 }

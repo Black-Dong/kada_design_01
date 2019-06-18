@@ -34,9 +34,9 @@ public class StudentController {
 
     // TODO: 2019/6/17 添加用户
     @RequestMapping("/addStudent")
-    public String addStudent(){
+    public String addStudent(BedRoom bedRoom){
         // TODO: 2019/6/17 和床位添加类似
-        
+        studentService.addStudent(bedRoom);
         return "redirect:studentList";
     }
 
