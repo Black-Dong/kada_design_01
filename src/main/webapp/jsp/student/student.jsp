@@ -142,8 +142,11 @@
 					  <td>${student.room.roomName }</td>
 					  <td>${student.room.dormitory.dorName }</td>
 
-					 <td align="center" width="40px;"><a href="${pageContext.request.contextPath}/student/updateStudentUI?stuId=${student.stuId}">
-							<img title="修改" src="${pageContext.request.contextPath}/images/update.gif"/></a>
+					 <td align="center" width="40px;">
+						 <a href="${pageContext.request.contextPath}/student/updateStudentUI?stuId=${student.stuId}">
+							 <img title="修改" src="${pageContext.request.contextPath}/images/update.gif"/></a>
+						 <a href="${pageContext.request.contextPath}/student/fileUpload?stuId=${student.stuId}">
+							 <img title="头像上传" src="${pageContext.request.contextPath}/images/update.gif"/></a>
 					  </td>
 				</tr>
 			</c:forEach>

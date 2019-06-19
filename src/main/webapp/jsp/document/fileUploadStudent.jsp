@@ -41,7 +41,7 @@
 
 
 							<tr>
-								<td class="font3 fftd">姓&nbsp;&nbsp;名：<input name="stuName" id="stuName" value="${student.stuName}" size="20" /></td>
+								<td class="font3 fftd">姓&nbsp;&nbsp;名：<input readonly="readonly" name="stuName" id="stuName" value="${student.stuName}" size="20" /></td>
 								<td class="font3 fftd">照片上传：<input name="image" type="file" id="stuPhone"  size="20" /></td>
 							</tr>
 

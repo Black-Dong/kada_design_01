@@ -32,6 +32,16 @@ public class StudentController {
     @Autowired
     private BedRoomService bedRoomService;
 
+    @RequestMapping("/fileUpload")
+    public ModelAndView fileUpload(Integer stuId,ModelAndView mv){
+        //传递学生信息
+        Student student = studentService.findStudentById(stuId);
+        mv.addObject("student",student);
+
+        mv.setViewName("forward:/jsp/document/fileUploadStudent.jsp");
+        return mv;
+    }
+
     @RequestMapping("/updateStudent")
     public String updateStudent(BedRoom bedRoom){
 
