@@ -125,7 +125,8 @@
 			  <td>家庭住址</td>
 			  <td>床位</td>
 			  <td>宿舍</td>
-			  <td>宿舍楼</td>
+				<td>宿舍楼</td>
+				<td>头像</td>
 			  <td align="center">操作</td>
 			</tr>
 			<c:forEach items="${pageBean.list}" var="student" varStatus="stat">
@@ -141,6 +142,8 @@
 					  <td>${student.room.bedRoom.roomBedName }</td>
 					  <td>${student.room.roomName }</td>
 					  <td>${student.room.dormitory.dorName }</td>
+
+					<td><img width="60px" src="${pageContext.request.contextPath}${student.stuImage.imagePath}" alt=""></td>
 
 					 <td align="center" width="40px;">
 						 <a href="${pageContext.request.contextPath}/student/updateStudentUI?stuId=${student.stuId}">

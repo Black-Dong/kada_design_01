@@ -51,6 +51,7 @@ public class StudentController {
 
         //文件名称
         fileName = UUID.randomUUID().toString().replace("-","")+fileName;
+        // /upload的真实路径
         String realPath = session.getServletContext().getRealPath("/upload");
 
         //创建文件夹(每天一个)
@@ -69,7 +70,7 @@ public class StudentController {
 
         //操作数据库
         // /日期/文件名
-        stuImage.setImagePath("/" + dateFormat + "/" + fileName);
+        stuImage.setImagePath("/update/" + dateFormat + "/" + fileName);
         stuImageService.savaStuImage(stuImage);
 
         return "redirect:studentList";

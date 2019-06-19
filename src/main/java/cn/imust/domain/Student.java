@@ -33,5 +33,7 @@ public class Student {
 
     private Integer bedRoomId;
 
+    private StuImage stuImage;
+
     private Room room;
 }

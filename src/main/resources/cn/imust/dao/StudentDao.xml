@@ -48,6 +48,11 @@
             </association>
 
         </association>
+        <!--图片-->
+        <association property="stuImage" javaType="stuImage">
+            <id property="imgId" column="img_id"></id>
+            <result property="imagePath" column="image_path"/>
+        </association>
     </resultMap>
 
     <update id="updateStudent" parameterType="bedRoom">
@@ -75,6 +80,7 @@
             left join tbl_room r on b.room_id = r.room_id
             left join tbl_dormitory d on r.room_dor_id = d.dor_id
             left join tbl_user u on d.user_id = u.uid
+            left join tbl_stu_image si on s.stu_id = si.stu_id
         <where>
             <if test="loginUser != null and loginUser.status != null and loginUser.status == 2">
                 and u.uid = #{loginUser.uid}
