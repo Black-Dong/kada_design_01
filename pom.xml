@@ -132,6 +132,7 @@
       <version>${mybatis.version}</version>
     </dependency>
 
+    <!--pagehelper插件-->
     <dependency>
       <groupId>com.github.pagehelper</groupId>
       <artifactId>pagehelper</artifactId>
@@ -146,6 +147,7 @@
       <version>1.3.0</version>
     </dependency>
 
+    <!--连接池-->
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>druid</artifactId>
@@ -175,12 +177,14 @@
     </dependency>
 
 
+    <!--lombok-->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
       <version>1.16.22</version>
     </dependency>
 
+    <!--ajax -->
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
