@@ -31,22 +31,18 @@
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr valign="top">
 		<td>
-			<form action="${pageContext.request.contextPath}/student/updateStudent" id="studentForm" method="post">
+			<form enctype="multipart/form-data" action="${pageContext.request.contextPath}/student/uploadStudent" id="studentForm" method="post">
 				<input name="stuId" type="hidden" id="stuId" value="${student.stuId}" size="20" />
 				<table width="100%" border="0" cellpadding="0" cellspacing="10" class="main_tab">
 					<tr><td class="font3 fftd">
 						<table>
 
-
-
-
 							<tr>
-								<td class="font3 fftd">姓&nbsp;&nbsp;名：<input readonly="readonly" name="stuName" id="stuName" value="${student.stuName}" size="20" /></td>
-								<td class="font3 fftd">照片上传：<input name="image" type="file" id="stuPhone"  size="20" /></td>
+								<td class="font3 fftd">姓&nbsp;&nbsp;名：
+									<input type="hidden" name="student.stuId" value="${student.stuId}">
+									<input readonly="readonly" name="student.stuName" id="stuName" value="${student.stuName}" size="20" /></td>
+								<td class="font3 fftd">照片上传：<input name="myFile" type="file" id="image"  size="20" /></td>
 							</tr>
-
-
-
 
 						</table>
 					</td></tr>

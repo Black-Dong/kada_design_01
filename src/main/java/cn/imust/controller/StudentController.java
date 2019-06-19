@@ -1,20 +1,23 @@
 package cn.imust.controller;
 
 import cn.imust.domain.*;
-import cn.imust.service.BedRoomService;
-import cn.imust.service.DormitoryService;
-import cn.imust.service.RoomService;
-import cn.imust.service.StudentService;
+import cn.imust.service.*;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/student")
@@ -32,6 +35,47 @@ public class StudentController {
     @Autowired
     private BedRoomService bedRoomService;
 
+    @Autowired
+    private StuImageService stuImageService;
+
+    //文件上传
+    @RequestMapping("/uploadStudent")
+    public String uploadStudent(StuImage stuImage, MultipartFile myFile, HttpSession session) throws IOException {
+        //获取数据
+//        System.err.println(stuId+":"+stuName);
+//        System.err.println(myFile);
+
+        //保存图片
+        String fileName = myFile.getOriginalFilename();
+        String name = myFile.getName();
+
+        //文件名称
+        fileName = UUID.randomUUID().toString().replace("-","")+fileName;
+        String realPath = session.getServletContext().getRealPath("/upload");
+
+        //创建文件夹(每天一个)
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String dateFormat = simpleDateFormat.format(new Date());
+        File file = new File(realPath+"/"+dateFormat);
+        if (!file.exists()){
+            file.mkdirs();
+        }
+
+        //创建文件
+        File newFile = new File(file,fileName);
+        //将上传文件写入
+        myFile.transferTo(newFile);
+
+
+        //操作数据库
+        // /日期/文件名
+        stuImage.setImagePath("/" + dateFormat + "/" + fileName);
+        stuImageService.savaStuImage(stuImage);
+
+        return "redirect:studentList";
+    }
+
+    //跳转到文件上传页面
     @RequestMapping("/fileUpload")
     public ModelAndView fileUpload(Integer stuId,ModelAndView mv){
         //传递学生信息
@@ -42,6 +86,7 @@ public class StudentController {
         return mv;
     }
 
+    //修改学生
     @RequestMapping("/updateStudent")
     public String updateStudent(BedRoom bedRoom){
 
