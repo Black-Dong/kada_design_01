@@ -15,6 +15,12 @@ public class StuImageServiceImpl implements StuImageService {
 
     @Override
     public void savaStuImage(StuImage stuImage) {
-        stuImageDao.savaStuImage(stuImage);
+        Integer imgId = stuImageDao.findStuId(stuImage.getStudent().getStuId());
+        if (imgId != null){
+            stuImage.setImgId(imgId);
+            stuImageDao.updateImage(stuImage);
+        }else {
+            stuImageDao.savaStuImage(stuImage);
+        }
     }
 }

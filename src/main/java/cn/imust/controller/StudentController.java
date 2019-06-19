@@ -70,7 +70,7 @@ public class StudentController {
 
         //操作数据库
         // /日期/文件名
-        stuImage.setImagePath("/update/" + dateFormat + "/" + fileName);
+        stuImage.setImagePath("/upload/" + dateFormat + "/" + fileName);
         stuImageService.savaStuImage(stuImage);
 
         return "redirect:studentList";

@@ -7,4 +7,13 @@
     <insert id="savaStuImage" parameterType="stuImage">
         insert into tbl_stu_image values(null,#{imagePath},#{student.stuId})
     </insert>
+
+    <select id="findStuId" parameterType="int" resultType="int">
+        select img_id from tbl_stu_image where stu_id = #{value }
+    </select>
+
+
+    <update id="updateImage" parameterType="stuImage">
+        update tbl_stu_image set image_path = #{imagePath } where img_id = #{imgId}
+    </update>
 </mapper>
