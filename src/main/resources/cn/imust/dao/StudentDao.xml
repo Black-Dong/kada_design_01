@@ -16,6 +16,7 @@
         <result column="stu_gender" property="stuGender"></result>
         <result column="stu_address" property="stuAddress"></result>
         <result column="room_name" property="roomName"></result>
+        <result column="bed_room_id" property="bedRoomId"></result>
         <!--外键 对象-->
         <association property="room" javaType="room" >
             <!--主键-->
@@ -48,6 +49,13 @@
 
         </association>
     </resultMap>
+
+    <update id="updateStudent" parameterType="bedRoom">
+        update tbl_student set stu_name=#{student.stuName},stu_phone=#{student.stuPhone},stu_family_phone=#{student.stuFamilyPhone},
+            stu_teacher_name=#{student.stuTeacherName},stu_teacher_phone=#{student.stuTeacherPhone},stu_gender=#{student.stuGender},stu_address=#{student.stuAddress},
+            room_name=#{student.roomName},bed_room_id=#{bedId}
+            where stu_id=#{student.stuId}
+    </update>
 
     <!--添加学生-->
     <insert id="addStudent" parameterType="bedRoom" useGeneratedKeys="true" keyProperty="student.stuId">

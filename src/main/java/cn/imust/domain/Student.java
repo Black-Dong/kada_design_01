@@ -31,5 +31,7 @@ public class Student {
     private String stuAddress;
     private String roomName;
 
+    private Integer bedRoomId;
+
     private Room room;
 }

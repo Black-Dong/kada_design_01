@@ -80,7 +80,7 @@
 						<table>
 							<tr>
 								<td class="font3 fftd">&nbsp;宿舍楼：
-									<select name="dormitory.dorId" onchange="changeDormitory(this)">
+									<select name="room.dormitory.dorId" onchange="changeDormitory(this)">
 										<option value="">请选择</option>
 										<%--<option value="${student.room.dormitory.dorId}">${student.room.dormitory.dorName}</option>--%>
 										<c:forEach items="${dormitoryList}" var="dormitory">
@@ -112,7 +112,7 @@
 
 							<tr>
 								<td class="font3 fftd">床&nbsp;&nbsp;位：
-									<select id="bedRoomSelect"  name="bedRoom.bedId" id="bedRoomId">
+									<select id="bedRoomSelect"  name="bedId" id="bedRoomId">
 										<option value="">请选择</option>
 										/*只有学员有床位的情况 如果学生床位不为空 显示即可*/
 										<c:if test="${not empty student.room}">
@@ -132,6 +132,8 @@
 								<td class="font3 fftd">姓&nbsp;&nbsp;名：
 									<%--隐藏域存放id属性--%>
 									<input type="hidden" value="${student.stuId}" name="student.stuId"/>
+									<%--隐藏域存放床位id--%>
+									<input type="hidden" value="${student.bedRoomId}" name="student.bedRoomId">
 									<input name="student.stuName" id="stuName" value="${student.stuName}" size="20" /></td>
 								<td class="font3 fftd">电&nbsp;&nbsp;话：<input name="student.stuPhone" id="stuPhone" value="${student.stuPhone}" size="20" /></td>
 							</tr>

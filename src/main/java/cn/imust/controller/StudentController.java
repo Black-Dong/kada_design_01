@@ -32,6 +32,14 @@ public class StudentController {
     @Autowired
     private BedRoomService bedRoomService;
 
+    @RequestMapping("/updateStudent")
+    public String updateStudent(BedRoom bedRoom){
+
+        studentService.updateStudent(bedRoom);
+
+        return "redirect:studentList";
+    }
+
     //跳转修改页面
     @RequestMapping("/updateStudentUI")
     public ModelAndView updateStudentUI(Integer stuId,ModelAndView mv,HttpSession session){

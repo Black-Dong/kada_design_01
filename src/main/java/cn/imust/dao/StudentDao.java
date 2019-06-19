@@ -14,4 +14,6 @@ public interface StudentDao {
     List<Student> studentList(PageBeanUI pageBeanUI);
 
     Student findStudentById(Integer stuId);
+
+    void updateStudent(BedRoom bedRoom);
 }
