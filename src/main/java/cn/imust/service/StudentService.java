@@ -13,4 +13,6 @@ public interface StudentService {
     void addStudent(BedRoom bedRoom);
 
     void deleteStudentById(int id);
+
+    Student findStudentById(Integer stuId);
 }

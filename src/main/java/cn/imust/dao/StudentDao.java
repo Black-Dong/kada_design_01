@@ -12,4 +12,6 @@ public interface StudentDao {
     void deleteStudentById(Integer stuId);
 
     List<Student> studentList(PageBeanUI pageBeanUI);
+
+    Student findStudentById(Integer stuId);
 }

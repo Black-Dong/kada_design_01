@@ -26,7 +26,7 @@
             function changeDormitory(dorSelect){
                 //当修改宿舍楼时 访问服务器 动态的获得信息
                 $.ajax({
-                    url:"${pageContext.request.contextPath}/room/getAjaxRoomList",//访问路径
+                    url:"${pageContext.request.contextPath}/student/getAjaxRoomList",//访问路径
                     data:'{"dorId":"'+dorSelect.value+'"}' , //请求参数 {"key":"value"}
                     dataType : "json", //返回值类型
                     type:"post", //请求类型
@@ -49,7 +49,7 @@
             function changeRoom(roomSelect){
                 //当修改宿舍时 访问服务器 动态的获得信息
                 $.ajax({
-                    url:"${pageContext.request.contextPath}/bedroom/getAjaxBedRoomList",//访问路径
+                    url:"${pageContext.request.contextPath}/student/getAjaxBedRoomList",//访问路径
                     data:'{"roomId":"'+roomSelect.value+'"}' , //请求参数 {"key":"value"}
                     dataType : "json", //返回值类型
                     type:"post", //请求类型
@@ -114,7 +114,7 @@
 								<td class="font3 fftd">床&nbsp;&nbsp;位：
 									<select id="bedRoomSelect"  name="bedRoom.bedId" id="bedRoomId">
 										<option value="">请选择</option>
-										/*只是学员有床位的情况 如果学生床位不为空 显示即可*/
+										/*只有学员有床位的情况 如果学生床位不为空 显示即可*/
 										<c:if test="${not empty student.room}">
 											<option  selected value="${student.room.bedRoom.bedId}">${student.room.bedRoom.roomBedName}</option>
 										</c:if>

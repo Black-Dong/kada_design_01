@@ -32,6 +32,32 @@ public class StudentController {
     @Autowired
     private BedRoomService bedRoomService;
 
+    //跳转修改页面
+    @RequestMapping("/updateStudentUI")
+    public ModelAndView updateStudentUI(Integer stuId,ModelAndView mv,HttpSession session){
+
+        User loginUser = (User) session.getAttribute("loginUser");
+        //传递宿舍楼信息
+        List<Dormitory> dormitoryList = dormitoryService.findAllByUser(loginUser);
+
+        //传递学生信息
+        Student student = studentService.findStudentById(stuId);
+
+        //传递宿舍信息
+        List<Room> roomList = roomService.findAllRoomByDormitory(student.getRoom().getDormitory());
+
+        //传递床位信息
+        List<BedRoom> bedRoomList = bedRoomService.findAllBedroomByRoom(student.getRoom());
+
+        mv.addObject("bedRoomList",bedRoomList);
+        mv.addObject("roomList",roomList);
+        mv.addObject("dormitoryList",dormitoryList);
+        mv.addObject("student",student);
+
+        mv.setViewName("forward:/jsp/student/showUpdateStudent.jsp");
+        return mv;
+    }
+
     //和退住一样
     @RequestMapping("/deleteById")
     public String deleteById(Integer[] ids){

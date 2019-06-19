@@ -37,13 +37,21 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void addStudent(BedRoom bedRoom) {
 
-        Room room = roomDao.finRoomById(bedRoom.getRoom().getRoomId());
+        Room room;
+        //根据传入的roomId查询宿舍, 主要是宿舍名称  --如果有
+        if (bedRoom.getRoom().getRoomId() != null && bedRoom.getRoom().getRoomId() != 0) {
+            room = roomDao.finRoomById(bedRoom.getRoom().getRoomId());
+            bedRoom.getStudent().setRoomName(room.getRoomName());
+        }
 
-        bedRoom.getStudent().setRoomName(room.getRoomName());
+        //保存学生
         studentDao.addStudent(bedRoom);
 
-        bedRoom.setIsFlag("Y");
-        bedRoomDao.updateBedRoom(bedRoom);
+        //修改床位
+        if (bedRoom.getBedId() != null){
+            bedRoom.setIsFlag("Y");
+            bedRoomDao.updateBedRoom(bedRoom);
+        }
     }
 
     @Override
@@ -58,5 +66,10 @@ public class StudentServiceImpl implements StudentService {
         bedRoom.setIsFlag("N");
         bedRoom.getStudent().setStuId(0);
         bedRoomDao.updateBedRoom(bedRoom);
+    }
+
+    @Override
+    public Student findStudentById(Integer stuId) {
+        return studentDao.findStudentById(stuId);
     }
 }
