@@ -28,6 +28,23 @@ public class RoomController {
     @Autowired
     private BedRoomService bedRoomService;
 
+    @RequestMapping("/roomUpdate")
+    public String roomUpdate(Room room){
+
+        roomService.roomUpdate(room);
+
+        return "redirect:roomList";
+    }
+
+    @RequestMapping("/updateRoomUI")
+    public ModelAndView updateRoomUI(Integer roomId, ModelAndView mv){
+        Room room = roomService.findRoomById(roomId);
+
+        mv.addObject("room",room);
+        mv.setViewName("forward:/jsp/room/showUpdateRoom.jsp");
+        return mv;
+    }
+
     //删除宿舍(同时删除床位和学生)
     @RequestMapping("/deleteById")
     public String deleteById(Integer[] ids){

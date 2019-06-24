@@ -132,7 +132,7 @@
 					  <td>${room.dormitory.dorName }</td>
 					  <td>${room.dormitory.user.name }</td>
 
-					 <td align="center" width="40px;"><a href="${pageContext.request.contextPath}/user/updateUserUI?uid=${user.uid}">
+					 <td align="center" width="40px;"><a href="${pageContext.request.contextPath}/room/updateRoomUI?roomId=${room.roomId}">
 							<img title="修改" src="${pageContext.request.contextPath}/images/update.gif"/></a>
 					  </td>
 				</tr>

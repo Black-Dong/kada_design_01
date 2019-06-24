@@ -14,4 +14,8 @@ public interface RoomService {
     List<Room> findAllRoomByDormitory(Dormitory dormitory);
 
     void deleteRoomById(int id);
+
+    Room findRoomById(Integer roomId);
+
+    void roomUpdate(Room room);
 }

@@ -51,6 +51,7 @@
                 </if>
             </if>
         </where>
+         order by r.room_name
     </select>
 
 
@@ -59,7 +60,9 @@
     </select>
 
     <select id="finRoomById" parameterType="int" resultMap="roomMap">
-        select * from tbl_room where room_id = #{value}
+        select * from tbl_room r
+        left join tbl_dormitory d on r.room_dor_id = d.dor_id
+        where room_id = #{value}
     </select>
 
     <delete id="deleteRoomById" parameterType="int">
@@ -69,4 +72,8 @@
     <select id="findRoomIdByDorId" parameterType="int" resultType="int">
         select room_id from tbl_room where room_dor_id = #{value }
     </select>
+
+    <update id="roomUpdate" parameterType="room">
+        update tbl_room set room_name = #{roomName} where room_id = #{roomId}
+    </update>
 </mapper>

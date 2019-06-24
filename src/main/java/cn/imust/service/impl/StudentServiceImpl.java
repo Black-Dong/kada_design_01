@@ -30,7 +30,8 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> studentList(PageBeanUI pageBeanUI) {
 
-        PageHelper.startPage(pageBeanUI.getPageIndex(),pageBeanUI.getPageSize());
+//        PageHelper.startPage(pageBeanUI.getPageIndex(),pageBeanUI.getPageSize());
+        PageHelper.startPage(pageBeanUI.getPageIndex(),5);
         return studentDao.studentList(pageBeanUI);
     }
 

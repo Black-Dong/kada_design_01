@@ -30,6 +30,7 @@ public class UserController {
     @Autowired
     private UserService userService;//注入service
 
+    //根据id删除管理员
     @RequestMapping("/deleteById")
     public String deleteById(Integer[] ids){
         userService.deleteById(ids);

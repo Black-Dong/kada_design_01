@@ -63,4 +63,14 @@ public class RoomServiceImpl implements RoomService {
         bedRoomDao.deleteByRoomId(id);
 
     }
+
+    @Override
+    public Room findRoomById(Integer roomId) {
+        return roomDao.finRoomById(roomId);
+    }
+
+    @Override
+    public void roomUpdate(Room room) {
+        roomDao.roomUpdate(room);
+    }
 }
