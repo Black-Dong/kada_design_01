@@ -17,4 +17,6 @@ public interface DormitoryService {
     void updateDormitory(Dormitory dormitory);
 
     List<Dormitory> findAllByUser(User user);
+
+    List<Dormitory> findAllPgByUser(Integer pageIndex,User user);
 }

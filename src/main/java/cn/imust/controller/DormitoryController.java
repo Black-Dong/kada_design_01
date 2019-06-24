@@ -4,6 +4,7 @@ import cn.imust.domain.Dormitory;
 import cn.imust.domain.User;
 import cn.imust.service.DormitoryService;
 import cn.imust.service.UserService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,16 +72,23 @@ public class DormitoryController {
 
     //获取宿舍楼列表(包括模糊查询)
     @RequestMapping("/dormitoryList")
-    public ModelAndView dormitoryList(HttpSession session){
+    public ModelAndView dormitoryList(Integer pageIndex,HttpSession session){
 
+        if (pageIndex == null || pageIndex == 0){
+            pageIndex =1;
+        }
         ModelAndView mv = new ModelAndView();
 
         User user = (User) session.getAttribute("loginUser");
-        List<Dormitory> dormitoryList =  dormitoryService.findAllByUser(user);
+//        List<Dormitory> dormitoryList =  dormitoryService.findAllByUser(user);
+        List<Dormitory> dormitoryList =  dormitoryService.findAllPgByUser(pageIndex,user);
         for (Dormitory dormitory : dormitoryList){
             System.out.println(dormitory);
         }
-        mv.addObject("dormitoryList", dormitoryList);
+
+        PageInfo pageInfo = new PageInfo(dormitoryList);
+        mv.addObject("pageBean", pageInfo);
+
         mv.setViewName("forward:/jsp/dormitory/dormitory.jsp");
 
         return mv;

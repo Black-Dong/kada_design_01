@@ -106,7 +106,7 @@
 
 			  <td align="center">操作</td>
 			</tr>
-			<c:forEach items="${dormitoryList}" var="dormitory" varStatus="stat">
+			<c:forEach items="${pageBean.list}" var="dormitory" varStatus="stat">
 				<tr id="data_${stat.index}" align="center" class="main_trbg" >
 					<td><input type="checkbox" id="box_${stat.index}" value="${dormitory.dorId}"></td>
 					  <td>${dormitory.dorName}</td>
@@ -123,42 +123,40 @@
 
 		<script>
 			function userPageMethod(pageNumber){
-				$("#pageNumberId").val(pageNumber);
-				var params = $("#userForm").serialize();
-				location.href="${pageContext.request.contextPath}/user/userList?"+params;
+				location.href="${pageContext.request.contextPath}/dormitory/dormitoryList?pageIndex="+pageNumber;
 			}
 		</script>
 	  <!-- 分页标签 -->
-	  <tr valign="top"><td align="center" class="font3">
-		  <nav aria-label="Page navigation">
-			  <ul class="pagination">
-				  <li>
-					  <a href="javascript:void(0)" onclick="userPageMethod(1)" aria-label="Previous">
-						  <span aria-hidden="true">&laquo;</span>
-					  </a>
-				  </li>
-				  <li>
-					  <a href="javascript:void(0)" onclick="userPageMethod(${pageBean.pageNumber-1})"  aria-label="Previous">
-						  <span aria-hidden="true">上页</span>
-					  </a>
-				  </li>
+		<tr valign="top"><td align="center" class="font3">
+			<nav aria-label="Page navigation">
+				<ul class="pagination">
+					<li>
+						<a href="javascript:void(0)" onclick="userPageMethod(1)" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)" onclick="userPageMethod(${pageBean.prePage})"  aria-label="Previous">
+							<span aria-hidden="true">上页</span>
+						</a>
+					</li>
 
-				  <c:forEach begin="${pageBean.start}" end="${pageBean.end}" var="num">
-				  	<li ${pageBean.pageNumber==num ? 'class="active"' : ""} ><a href="javascript:void(0)" onclick="userPageMethod(${num})">${num}</a></li>
-				  </c:forEach>
-				  <li>
-					  <a href="javascript:void(0)" onclick="userPageMethod(${pageBean.pageNumber+1})" aria-label="Next">
-						  <span aria-hidden="true">下页</span>
-					  </a>
-				  </li>
-				  <li>
-					  <a href="javascript:void(0)" onclick="userPageMethod(${pageBean.totalPage})" aria-label="Next">
-						  <span aria-hidden="true">&raquo;</span>
-					  </a>
-				  </li>
-			  </ul>
-		  </nav>
-	  </td></tr>
+					<c:forEach begin="${pageBean.navigateFirstPage}" end="${pageBean.navigateLastPage}" var="num">
+						<li ${pageBean.pageNum==num ? 'class="active"' : ""} ><a href="javascript:void(0)" onclick="userPageMethod(${num})">${num}</a></li>
+					</c:forEach>
+					<li>
+						<a href="javascript:void(0)" onclick="userPageMethod(${pageBean.nextPage})" aria-label="Next">
+							<span aria-hidden="true">下页</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0)" onclick="userPageMethod(${pageBean.pages})" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</td></tr>
 	</table>
 	<div style="height:10px;"></div>
 </body>

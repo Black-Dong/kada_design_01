@@ -6,6 +6,7 @@ import cn.imust.domain.Dormitory;
 import cn.imust.domain.User;
 import cn.imust.service.DormitoryService;
 import cn.imust.service.RoomService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,6 +57,12 @@ public class DormitoryServiceImpl implements DormitoryService {
 
     @Override
     public List<Dormitory> findAllByUser(User user) {
+        return dormitoryDao.findAllByUser(user);
+    }
+
+    @Override
+    public List<Dormitory> findAllPgByUser(Integer pageIndex,User user) {
+        PageHelper.startPage(pageIndex,2);
         return dormitoryDao.findAllByUser(user);
     }
 }
