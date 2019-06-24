@@ -25,4 +25,6 @@ public interface UserService extends UserDetailsService {
 
     //删除用户
     void deleteById(Integer[] ids);
+
+    List<User> findPgUsers(PageBeanUI pageBeanUI);
 }

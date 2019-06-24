@@ -4,6 +4,7 @@ import cn.imust.dao.UserDao;
 import cn.imust.domain.PageBeanUI;
 import cn.imust.domain.User;
 import cn.imust.service.UserService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -89,6 +90,13 @@ public class UserServiceImpl implements UserService {
         for (int id : ids){
             userDao.deleteById(id);
         }
+    }
+
+    @Override
+    public List<User> findPgUsers(PageBeanUI pageBeanUI) {
+
+        PageHelper.startPage(pageBeanUI.getPageIndex(),2);
+        return userDao.findUsers(pageBeanUI);
     }
 
     @Override

@@ -4,6 +4,7 @@ package cn.imust.controller;
 import cn.imust.domain.PageBeanUI;
 import cn.imust.domain.User;
 import cn.imust.service.UserService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -153,11 +154,12 @@ public class UserController {
         //赋值两遍数据 导致 封装不了数据
         //System.err.println(pageBeanUI);
         //查询用户的数据
-        List<User> users = userService.findUsers(pageBeanUI);
+//        List<User> users = userService.findUsers(pageBeanUI);
+        List<User> users = userService.findPgUsers(pageBeanUI);
 
-
+        PageInfo pageInfo = new PageInfo(users);
         //将数据保存到request域中
-        modelAndView.addObject("users" , users);
+        modelAndView.addObject("pageBean" , pageInfo);
         //用于页面回显数据使用
         modelAndView.addObject("pageBeanUI" , pageBeanUI);
 
