@@ -69,7 +69,7 @@ public class StudentController {
 
 
         //操作数据库
-        // /日期/文件名
+        // /update/日期/文件名
         stuImage.setImagePath("/upload/" + dateFormat + "/" + fileName);
         stuImageService.savaStuImage(stuImage);
 

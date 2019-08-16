@@ -60,9 +60,9 @@
         </security:authentication-provider>
     </security:authentication-manager>
 
-    <!-- 配置加密类 -->
+    <!-- 配置加密类
     <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
-
+ -->
     <!--use-expressions为false, access="ROLE_ADMIN ROLE_USER“ 放开下边的bean在页面也可以使用seuriy标签-->
     <!--    <bean id="webSecurityExpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"></bean>-->
 
